@@ -1,0 +1,136 @@
+#logo{ /* tamanho da logo */
+    width: 300px;
+}
+
+body { /* margem */
+    font-family: comic sans-serif;
+    margin: 0;
+}
+
+header { 
+    padding: 20px; /* altura */
+    text-align: center;
+    background: #C11212;
+    color: white;
+    margin:0px;
+}
+
+nav { /* fundo */
+    padding: 15px; /* altura */
+    display: flex;
+    background-color: #333;
+    justify-content: end;
+    text-align: right;
+}
+
+nav a { /* espaçamento e fonte */
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+nav a:hover { /* sombriado ao passar o mouse */
+    background-color: #ddd;
+    color: black;
+    transition-duration: 1s;
+}
+
+.configuracoes{
+    background: #ffffff;
+}
+.perfil { 
+    display: flex;
+    justify-content: end;
+    text-align: right;
+    margin:0px;
+}
+
+.titulo{ /* gestão de estoque */
+    text-align: left;
+    margin:0px;
+}
+
+.crud { /* add produto, pesquisar e excluir*/
+    display: flex;
+    background: #ffffff;
+    padding: 2%;
+}
+
+#lupa{
+    width: 10px;
+}
+
+.campostab{
+    display: flex;
+    padding: 14px 120px;
+    text-decoration: none;
+    text-align: end;
+}
+
+.itens{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #333; /* borda */
+    border-color: 40px; /* borda */
+    margin: 10px 0;
+}
+
+.um{
+    display: flex;
+    background: #6e6e6e;
+    padding: 2%;
+    margin: 5px 0;
+}
+
+.dois{
+    display: flex;
+    background: #e6b0b0;
+    padding: 2%;
+    margin: 5px 0;
+}
+.tres{
+    display: flex;
+    background: #f33f3f;
+    padding: 2%;
+    margin: 5px 0;
+}
+
+footer { /* altura, centralização e cores */
+    padding: 10px; /* altura */
+    text-align: center;
+    background: #C11212;
+    color: aliceblue;
+}
+
+footer h2{
+    display:inline; /* ???? */
+}
+
+.row {  
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+    background-color:  #e4a530;
+  }
+
+
+.side-right {
+    flex: 30%;
+    background-color:  #30e478;
+    padding: 2%;
+  }
+  
+main {
+    flex: 70%;
+    background-color:#91c6fc;
+    padding: 0%;
+  }
+  
+.fakeimg {
+    background-color: rgb(234, 245, 82);
+    width: 100%;
+    padding: 50px;
+  }
+
+
