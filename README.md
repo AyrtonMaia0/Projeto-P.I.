@@ -4,5 +4,5 @@ Este Projeto se trata de um dos trabalhos solicitado de uma cadeira da Faculdade
 
 Link do Site ainda em construção:
 <br>
-<a href ='https://azsolutions.pythonanywhere.com/'>LINK</a>
+<a href ='https://azsolutions.pythonanywhere.com/' target='blank'>LINK</a>
 
