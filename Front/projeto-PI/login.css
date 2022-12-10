@@ -1,0 +1,113 @@
+*{
+    font-family: 'Spartan', sans-serif;    
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.headerr {
+    display: flex;
+    flex-flow: row wrap;
+
+}
+
+header{
+    background-color:rgb(188, 28, 28);
+    min-height: 80px;
+}
+
+label{
+    color: beige;
+    font-weight: lighter;
+  
+}
+
+.container{
+    display: flex;
+    grid-template-columns: 33% 33% 33% ;
+    background-color: rgb(188, 28, 28);
+}
+
+.divForms{
+    margin-left: 30px;
+    flex: 50%;
+    padding-top: 30px;
+    padding-left: 30px;
+    width: 60%;
+}
+
+.links{
+    width: 40%;
+    margin-top: 18px;
+}
+
+input{
+    border-radius: 1.5px;
+    border: none;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    padding-left: 50px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 4px; 
+}
+
+.ajustarSenha{
+    padding-left: 20px;
+}
+
+button{
+    margin-left: 30px;
+    border-radius: 8px;
+    background-color: white;
+    border: none;
+    padding-top: 3px;
+    padding-block: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+button > p {
+    font-weight: bolder;
+    color: red;
+}
+
+.ajustarButton{
+    margin-right: 10px;
+}
+
+footer{
+   background-color:rgb(210, 24, 24);
+   text-align: center;
+   min-height: 80px;
+}
+
+footer > p {
+    padding-top: 31px;
+    color: white;
+}
+
+.teste{ 
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.teste3{
+    width: 15%;
+}
+
+.teste2{
+    width: 80%;
+    margin-left: 35px;
+}
+
+a {
+    color: white;
+}
+
