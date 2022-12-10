@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="cadastro.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>GL Cadastro</title>
+        <link rel="icon" type="image/x-icon" href="logo_icon.png">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <style>
+        *{margin:0;padding:0;box-sizing: border-box;}
+
+        #logo{ /* tamanho da logo */
+            width: 300px;
+        }
+
+        header { 
+            padding: 20px; /* altura */
+            text-align: center;
+            background: #C11212;
+            color: white;
+            margin:0px;
+        }
+
+        body{
+            background-color:  rgb(230, 230, 230);
+            font-family: 'League Spartan', sans-serif !important;
+        }
+        
+        form{
+            background-color: rgb(255, 255, 255);
+            max-width: 500px;
+            width: 70%;
+            padding: 20px;
+            position:absolute;
+            left: 50%;
+            top: 98%;
+            transform: translate(-50%, -50%);
+        }
+        form h3{
+            text-align: center;
+            color: #c11212;
+            /*
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            */
+        }
+
+        form input[type=text],
+        form input[type=password],
+        form input[type=date]{
+            width: 100%;
+            height: 45px;
+            border: 1px solid #F0F3F4;
+            padding-left: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px; 
+        }
+
+        .divForms{ /* forms genero */
+            padding: 10px;
+            width: 100%;
+            height: 45px;
+            border: 1px solid #F0F3F4;
+            padding-left: 0px;
+            border-radius: 10px;
+            margin-bottom: 10px; 
+        }
+
+        form input[type=radio]{ /*input genero */
+            width: 8%;
+        }
+
+        form input[type=submit]{
+            width: 100%;
+            height: 40px;
+            cursor: pointer;
+            background: #C11212;
+            color: rgb(255, 255, 255);
+            border: 0;
+            border-radius: 20px;
+            transition: 1s;
+        }
+
+        form input[type=submit]:hover{
+            background-color: #970909;
+        }
+        form input[type=text]:focus{
+            outline: 0; 
+        }
+        form input[type=password]:focus{
+            outline: 0;
+        }
+        form input[type=cell]:focus{
+            outline: 0;
+        }
+        form input[type=cpf]:focus{
+            outline: 0;
+        }
+
+        p {
+            margin-bottom: 5px; 
+            width: 100%;
+            height: 20px;
+            padding-left: 10px;
+        }
+        
+        #asterisco{
+            color: #c11212;
+        }
+
+        #mensagem{
+        /*  font-size : 14px; */
+            text-align: center;
+            margin-left: 40px;
+            width: 80%;
+            color: #878787;
+            padding: 15px;
+            margin-bottom: 25px; 
+        }
+    </style>
+
+    <body> 
+        <header>
+            <a href="login.html"><img id='logo' src="logo.png" alt="logo gl refrigeração automotiva"></a>
+        </header>
+
+        <form> 
+            <h3>Cadastre-se</h3>
+
+            <p>Nome completo<span id="asterisco">*</span></p>
+            <input id="nome" type="text" name="name" placeholder="Seu nome..." required/>
+
+            <p>Gênero</p> 
+            <div class="divForms">
+                <span><input id="F" type="radio" required/> Feminino</span>
+                <span><input id="M" type="radio" required/> Masculino</span>
+                <span><input id="outro" type="radio" required/> Outro</span>
+            </div>
+
+            <p>Data de nascimento<span id="asterisco">*</span></p>     
+            <input id="data" type="date" name="date" required/>
+
+            <p>CPF<span id="asterisco">*</span></p>
+            <input id="cpf" type="text" name="cpf" placeholder="Seu CPF..." required/>
+
+            <p>Celular<span id="asterisco">*</span></p>
+            <input id="cell" type="text" name="cell" placeholder="Seu número de celular..." required/>
+
+            <p>E-mail<span id="asterisco">*</span></p>
+            <input id="email" type="text" name="email" placeholder="Seu e-mail..." required/>
+            
+            <p>Senha<span id="asterisco">*</span></p>
+            <input id="password" type="password" name="password" placeholder="Sua senha..." required/>
+
+            <p>Confirmar senha<span id="asterisco">*</span></p>
+            <input id="confpassword" type="password" name="senha" placeholder="Confirmar senha" required/>
+
+            <p>Cargo<span id="asterisco">*</span></p>
+            <input id="cargo" type="text" name="cargo" placeholder="Caixa ou Gerente" required/> 
+
+            <!--
+            <br>
+            <p><input type="checkbox" required/> LGPD<span id="asterisco">*</span></p>
+            -->
+
+            <input type="submit" name="acao" value="Confirmar"/>
+<br>
+            <p id="mensagem">Ao criar o seu cadastro, você concorda com a nossa <a href="#"> política de privacidade</a>.</p>
+        </form>
+
+        <script>
+            var email = document.getElementById('email');
+            var password = document.getElementById('password');
+            var cell = document.getElementById('cell');
+            var cpf = document.getElementById('cpf');
+            var name = document.getElementById('nome');
+
+            nome.addEventListener('focus',()=>{
+                nome.style.borderColor = "#970909" 
+            });
+            nome.addEventListener('blur',()=>{
+                nome.style.borderColor = "#ccc" 
+            });
+
+            data.addEventListener('focus',()=>{
+                data.style.borderColor = "#970909" 
+            });
+            data.addEventListener('blur',()=>{
+                data.style.borderColor = "#ccc" 
+            });
+
+            cpf.addEventListener('focus',()=>{
+                cpf.style.borderColor = "#970909" 
+            });
+            cpf.addEventListener('blur',()=>{
+                cpf.style.borderColor = "#ccc" 
+            });
+
+            cell.addEventListener('focus',()=>{
+                cell.style.borderColor = "#970909" 
+            });
+            cell.addEventListener('blur',()=>{
+                cell.style.borderColor = "#ccc" 
+            });
+
+            email.addEventListener('focus',()=>{
+                email.style.borderColor = "#970909" 
+            });
+            email.addEventListener('blur',()=>{
+                email.style.borderColor = "#ccc" 
+            });
+
+            password.addEventListener('focus',()=>{
+                password.style.borderColor = "#970909" 
+            });
+            password.addEventListener('blur',()=>{
+                password.style.borderColor = "#ccc" 
+            });
+
+            confpassword.addEventListener('focus',()=>{
+                confpassword.style.borderColor = "#970909" 
+            });
+            confpassword.addEventListener('blur',()=>{
+                confpassword.style.borderColor = "#ccc" 
+            });
+
+            cargo.addEventListener('focus',()=>{
+                cargo.style.borderColor = "#970909" 
+            });
+            cargo.addEventListener('blur',()=>{
+                cargo.style.borderColor = "#ccc" 
+            });
+        </script>
+    </body>
+</html>

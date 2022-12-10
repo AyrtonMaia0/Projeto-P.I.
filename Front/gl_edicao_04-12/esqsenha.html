@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="cadastro.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>GL Recuperar Senha</title>
+        <link rel="icon" type="image/x-icon" href="logo_icon.png">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <style>
+        *{margin:0;padding:0;box-sizing: border-box;}
+        
+        #logo{ /* tamanho da logo */
+            width: 300px;
+        }
+
+        header { 
+            padding: 20px; /* altura */
+            text-align: center;
+            background: #C11212;
+            color: white;
+            margin:0px;
+        }
+
+        body{
+            background-color:  rgb(230, 230, 230);
+            font-family: 'League Spartan', sans-serif !important;
+        }
+
+        form{
+            background-color: rgb(255, 255, 255);
+            max-width: 500px;
+            width: 70%;
+            padding: 20px;
+            position:absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        form h3{
+            text-align: center;
+            color: #c11212;
+            /* 
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            */
+        }
+
+        form input[type=text]{
+            width: 100%;
+            height: 45px;
+            border: 1px solid #F0F3F4;
+            padding-left: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px; 
+        }
+
+        form input[type=submit]{
+            width: 100%;
+            height: 40px;
+            cursor: pointer;
+            background: #c11212;
+            color: rgb(255, 255, 255);
+            border: 0;
+            border-radius: 20px;
+            transition: 1s;
+        }
+
+        form input[type=submit]:hover{
+            background-color: #970909;
+        }
+
+        form input[type=text]:focus{
+            outline: 0;
+        }
+
+        p {
+            margin-bottom: 5px; 
+            width: 100%;
+            height: 20px;
+            padding-left: 10px;
+        }
+
+        #asterisco{
+            color: #c11212;
+        }
+        #mensagem{
+        /*  font-size : 14px; */
+            text-align: center;
+            margin-left: 40px;
+            width: 80%;
+            color: #878787;
+        }
+    </style>
+
+    <body>
+        <header>
+            <a href="login.html"><img id='logo' src="logo.png" alt="logo gl refrigeração automotiva"></a>
+        </header>
+        
+        <form> 
+            <h3>Recuperar Senha</h3>
+            <br>
+            <p id="mensagem">Insira o seu email e enviaremos um link para você voltar a acessar a sua conta.</p>
+            <br>
+
+            <p>E-mail<span id="asterisco">*</span></p>
+            <input id="email" type="text" name="email" placeholder="Seu e-mail" required/>
+
+            <input type="submit" name="acao" value="Enviar"/>
+        </form>
+
+        <script>
+            var email = document.getElementById('email');
+
+            email.addEventListener('focus',()=>{
+                email.style.borderColor = "#970909" 
+            }); <!-- apagar um -->
+            email.addEventListener('blur',()=>{
+                email.style.borderColor = "#ccc" 
+            }); 
+
+        </script>
+    </body>
+</html>
