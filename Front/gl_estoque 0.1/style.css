@@ -1,0 +1,130 @@
+header{      
+    background-color: rgb(218, 32, 32);
+    align-items : center;
+    padding : 30px;
+
+    color : white;
+}
+
+header img{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+footer{
+    background-color: rgb(218, 32, 32);
+    align-items : center;
+    padding : 30px;
+
+    margin-top: 40px;
+    
+    font-size : 18px;
+    font-weight: 400 !important;
+    color : white;
+
+    text-align: center;   
+    
+    position : absolute;  
+    width: 100%;
+}
+
+body{
+    font-family: 'League Spartan', sans-serif !important;    
+}
+
+body h1{
+    font-size : 20px;
+    font-weight : 700;
+}
+
+
+.mainBody{
+    display: flex;
+}
+
+
+.leftMenu{
+    display: flex;
+    flex-direction: column;
+
+    font-size: 15px;
+
+    margin-right: 15px;
+
+    border-right: 2px solid rgb(172, 172, 172);
+}
+
+.leftMenu svg{
+    width : 25px;
+    margin-right: 8px;
+}
+
+
+
+table{  
+    border-radius: 5px;
+    border-top: 0px !important;    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top : 15px;
+}
+
+
+th,td {
+    border-left: 0px solid rgb(75, 75, 75);
+    border-right: 0px solid rgb(75, 75, 75);
+    padding: 10px;
+
+    margin-bottom: 10px;
+    width: 100px;
+
+    text-align: center;
+    vertical-align : middle !important;
+
+    font-weight : 600;    
+}
+
+th{  
+    text-align: center ! important;
+    border: 0px important;    
+}
+
+#data {
+
+    display : grid;
+       
+    align-self: baseline;   
+
+    margin-bottom: 10px;  
+}
+
+#data input {
+    padding: 10px;
+    margin : 5px;
+    width: 200px;
+
+    border-radius: 3px;
+    border: 0px;
+    background:rgb(190, 190, 190);
+
+    color : rgb(0, 0, 0);
+}
+
+label{
+    text-transform : uppercase;
+}
+
+.container button {
+    font-weight: bold;
+    text-align: center;     
+    
+    width : 90px;
+}
