@@ -178,17 +178,46 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Alterar estrutura de tabela
 -- -----------------------------------------------------
 
-alter table estoque drop column altura;
-alter table estoque drop column largura;
-alter table estoque drop column comprimento;
-alter table estoque drop column table1col;
-alter table estoque add column dimensoes varchar(50) after codBarras;
-alter table estoque change codProduto codProduto varchar(30);
-alter table estoque drop column table1col;
-alter table funcionario change Funcao funcao varchar(80);
-alter table estoque drop column largura;
-alter table estoque drop column altura;
-alter table estoque drop column comprimento;
-alter table estoque add column dimensoes varchar(50) after codBarras;
-alter table estoque add column qtd varchar(50) after circunferencia;
-alter table cliente drop column Venda_idVenda;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `altura`;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `largura`;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `comprimento`;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `table1col`;
+ALTER TABLE `AZSolution`.`Estoque` ADD COLUMN `dimensoes` VARCHAR(50) AFTER `codBarras`;
+ALTER TABLE `AZSolution`.`Estoque` CHANGE COLUMN `codProduto` `codProduto` VARCHAR(30) NOT NULL ; -- mudei
+ALTER TABLE `AZSolution`.`Compras` CHANGE COLUMN `qtdCompra` `qtdCompra` INT NULL DEFAULT NULL; -- adicionei
+ALTER TABLE `AZSolution`.`Compras` MODIFY COLUMN `qtdCompra` INT;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `table1col`;
+ALTER TABLE `AZSolution`.`Funcionario` CHANGE `Funcao` `funcao` VARCHAR(80);
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `largura`;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `altura`;
+ALTER TABLE `AZSolution`.`Estoque` DROP COLUMN `comprimento`;
+ALTER TABLE `AZSolution`.`Estoque` ADD COLUMN `dimensoes` VARCHAR(50) AFTER `codBarras`;
+ALTER TABLE `AZSolution`.`Estoque` ADD COLUMN `qtd` VARCHAR(50) AFTER `circunferencia`;
+ALTER TABLE `AZSolution`.`Cliente` DROP COLUMN `Venda_idVenda`;
+ALTER TABLE `AZSolution`.`Telefone` CHANGE COLUMN `idTelefone` `idTelefone` INT(11) NOT NULL AUTO_INCREMENT; -- adicionei
+-- GRANDE ALTERAÇÃO EM TELEFONE:
+ALTER TABLE `AZSolution`.`Telefone` 
+DROP FOREIGN KEY `fk_Telefone_Cliente1`,
+DROP FOREIGN KEY `fk_Telefone_Fornecedor1`,
+DROP FOREIGN KEY `fk_Telefone_Funcionario1`;
+ALTER TABLE `AZSolution`.`Telefone` 
+CHANGE COLUMN `Fornecedor_CNPJ` `Fornecedor_CNPJ` BIGINT(13) NULL ,
+CHANGE COLUMN `Cliente_CNPJ` `Cliente_CNPJ` BIGINT(14) NULL ,
+CHANGE COLUMN `Funcionario_CPF` `Funcionario_CPF` BIGINT(11) NULL ;
+ALTER TABLE `AZSolution`.`Telefone` 
+ADD CONSTRAINT `fk_Telefone_Cliente1`
+  FOREIGN KEY (`Cliente_CNPJ`)
+  REFERENCES `AZSolution`.`Cliente` (`CNPJ`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_Telefone_Fornecedor1`
+  FOREIGN KEY (`Fornecedor_CNPJ`)
+  REFERENCES `AZSolution`.`Fornecedor` (`CNPJ`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_Telefone_Funcionario1`
+  FOREIGN KEY (`Funcionario_CPF`)
+  REFERENCES `AZSolution`.`Funcionario` (`CPF`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
