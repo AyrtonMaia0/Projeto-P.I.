@@ -2,20 +2,20 @@
 -- Destruir DDL
 -- -----------------------------------------------------
 
-DROP TABLE `AZSolution`.`Compras`;
+DROP TABLE `GLRefrigeracao`.`Compras`;
 
-DROP TABLE `AZSolution`.`Telefone`;
+DROP TABLE `GLRefrigeracao`.`Telefone`;
 
-DROP TABLE `AZSolution`.`Fornecedor`;
+DROP TABLE `GLRefrigeracao`.`Fornecedor`;
 
-DROP TABLE `AZSolution`.`itensVenda`;
+DROP TABLE `GLRefrigeracao`.`itensVenda`;
 
-DROP TABLE `AZSolution`.`Estoque`;
+DROP TABLE `GLRefrigeracao`.`Estoque`;
 
-DROP TABLE `AZSolution`.`Cliente`;
+DROP TABLE `GLRefrigeracao`.`Cliente`;
 
-DROP TABLE `AZSolution`.`Venda`;
+DROP TABLE `GLRefrigeracao`.`Venda`;
 
-DROP TABLE `AZSolution`.`Funcionario`;
+DROP TABLE `GLRefrigeracao`.`Funcionario`;
 
-DROP SCHEMA `AZSolution`;
+DROP SCHEMA `GLRefrigeracao`;
