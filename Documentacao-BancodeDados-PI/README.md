@@ -2,6 +2,10 @@
 
 ---
 
+**SUMÁRIO**
+
+---
+
 **Projeto de BD para o PI:**
 
 - [x]  Elabora os diagramas do seu PI (domínios de negócio):
@@ -56,9 +60,13 @@ Pensando nisso partimos para fazer o mapeamento interno da empresa e como poder�
 
 # Modelo Conceitual
 
+![modeloConceitual_GL_0.1.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloConceitual_GL_0.1.png)
+
 ---
 
 # Modelo Lógico (MER)
+
+![modeloLogico_GL_04.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloLogico_GL_04.png)
 
 ---
 
@@ -305,7 +313,6 @@ alter table cliente drop column Venda_idVenda;
 drop schema azsolution;
 
 ```
-
 
 ---
 
