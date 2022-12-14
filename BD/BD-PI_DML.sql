@@ -1,22 +1,12 @@
 -- -----------------------------------------------------
--- Insert into
+-- DML - INSERT INTO
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Insert into fornecedor
--- -----------------------------------------------------
-insert into Fornecedor (CNPJ, nome, valorFrete, email, status)
-	value ("94006115000137", "Royce Connect", "600.00", "royceconect@gmail.com", "1"),
-		  ("50053765000168", "Spin", "350.00", "spin@gmail.com", "1"),
-          ("46212572000135", "Delphi", "250.00", "delphi@gmail.com", "1"),
-          ("28881621000140", "SuperCool", "860.00", "supercool@gmail.com", "1"),
-          ("24891754000147", "Importado", "350.00", "importado@gmail.com", "1"),
-          ("30879724000118", "McQuay", "150.00", "mcquay@gmail.com", "1");
--- -----------------------------------------------------
--- Insert into funcionario
+-- Insert into Funcionario
 -- -----------------------------------------------------
 
-insert into funcionario (CPF, nome, email, salario, dataAdm, dataDem, status, funcao)
+insert into Funcionario (CPF, nome, email, salario, dataAdm, dataDem, status, funcao)
 	value 
 		  ("85215974155", "Maria Lima", "marialima@gmail.com", "2000", "2022.11.29", null, "1", "Vendedor"),
           ("75365495111", "Gilmar Adrian", "gilmaradrian@gmail.com","2000", "2020.08.21", null, "1", "Vendedor"),
@@ -24,10 +14,11 @@ insert into funcionario (CPF, nome, email, salario, dataAdm, dataDem, status, fu
           ("18039522293", "Ayrton Maia", "ayrtonmaia@gail.com",  "2000", "2018.07.01", null, "1", "Caixa"),
           ("75120273114", "Danilo Farias", "danilofarias@gmail.com",  "3500", "2010.01.02", null, "1", "Gerente"),
           ("78249824407", "Jaqueline Lins", "jaquelinelins@gmal.com", "8000", "2009.06.15", null, "1", "CEO");
+
 -- -----------------------------------------------------
 -- Insert cliente
 -- -----------------------------------------------------
-insert into cliente (CNPJ, nome, email)
+insert into Cliente (CNPJ, nomeCliente, email)
 	value 
 		  ("81583383000170", "OficinaA", "oficinaa@gmail.com"),
 		  ("51451416000167", "OficinaB", "oficinab@gmail.com"),
@@ -49,29 +40,29 @@ insert into cliente (CNPJ, nome, email)
           ("77743700000109", "OficinaR", "oficinar@gmail.com"),
           ("73685215000167", "OficinaS", "oficinas@gmail.com"),
           ("78421344000161", "OficinaX", "oficinax@gmail.com");
-
--- -----------------------------------------------------
--- Insert into Compras
--- -----------------------------------------------------
           
-insert into compras (Estoque_codProduto, Fornecedor_CNPJ, dataComp, qtdCompra, valorCompra, obs)
-	value 
-		  ("700821", "94006115000137", "2022.12.02", "10", "500.00", null),
-          ("10029", "50053765000168", "2021.05.05", "5", "600.00", null),
-          ("250012", "46212572000135", "2022.08.21", "6", "700.00", null),
-          ("450210", "94006115000137", "2021.07.25", "50", "250.00", null),
-          ("824400", "24891754000147", "2022.01.15", "20", "400.00", null),
-          ("829900", "30879724000118", "2021.05.05", "15", "900.00", null),
-          ("740012", "24891754000147", "2022.10.10", "16", "650.00", null),
-          ("900002", "94006115000137", "2021.02.15", "20", "450.00", null),
-          ("850171", "28881621000140", "2022.02.15", "25", "300.00", null),
-          ("829900", "30879724000118", "2021.03.06", "30", "750.00", null);
+-- -----------------------------------------------------
+-- Insert into Venda
+-- -----------------------------------------------------
+
+insert into Venda (dataVenda, valorTotal, obs, cliente_cnpj, Funcionario_CPF)
+	value
+		  ("2022.12.02", "800.00", null, "4335917000106", "85215974155"),
+          ("2022.11.05", "700.00", null, "11346108000157", "85215974155"),
+          ("2022.10.03", "1200.00", null, "27690818000130", "85215974155"),
+          ("2022.09.04", "4000.00", null, "30865274000104", "75365495111"),
+          ("2022.08.10", "950.50", null, "32354618000146", "75365495111"),
+          ("2022.07.12", "3250.00", null, "39165274000176", "75365495111"),
+          ("2022.06.16", "250.35", null, "39165274000176", "12395175333"),
+          ("2022.05.18", "658.00", null, "39165274000176", "12395175333"),
+          ("2022.04.06", "980.00", null, "57541425000125", "12395175333"),
+          ("2022.03.25", "1200.00", null, "57541425000125", "12395175333");
 
 -- -----------------------------------------------------
 -- Insert into estoque
 -- -----------------------------------------------------
           
-insert into estoque (codProduto, nome, marca, preco, qnt, codBarras, dimensoes, circunferencia) 
+insert into Estoque (codProduto, nome, marca, preco, qnt, codBarras, dimensoes, circunferencia) 
 	value
 		  ("700821", "Evaporador Palio Fire", "Royce Connect", "280.00", "5", null, "800x370x140mm", null),
           ("10029", "Selo de Spin Original", "Spin", "35.00", "5", null, "434mm total / 250mm refil / Ø 30mm", null),
@@ -94,10 +85,38 @@ insert into estoque (codProduto, nome, marca, preco, qnt, codBarras, dimensoes, 
           ("600025", "COMPRESSOR MODELO 7H15 4627 TRATOR UNIPORT 2011> 8 ORELHAS 12 VOLTS POLIA 2A 132MM SAÍDA VERTICAL R134A", " Importado", "350.00", "5", null, "630x370x22mm", null);
 
 -- -----------------------------------------------------
+-- Insert itensvenda
+-- -----------------------------------------------------
+
+insert into itensVenda (Venda_idVenda, Estoque_codProduto, qntProduto)
+	value 
+		  ("1", "700821", "2"),
+          ("2", "850171", "5"),
+          ("3", "740014", "3"),
+          ("4", "600025", "3"),
+          ("5", "530100", "2"),
+          ("6", "740050", "3"),
+          ("7", "600123", "2"),
+          ("8", "250012", "2"),
+          ("9", "740019", "3"),
+          ("10", "700821", "2");
+
+-- -----------------------------------------------------
+-- Insert into Fornecedor
+-- -----------------------------------------------------
+insert into Fornecedor (CNPJ, nomeFornecedor, valorFrete, email, status)
+	value ("94006115000137", "Royce Connect", "600.00", "royceconect@gmail.com", "1"),
+		  ("50053765000168", "Spin", "350.00", "spin@gmail.com", "1"),
+          ("46212572000135", "Delphi", "250.00", "delphi@gmail.com", "1"),
+          ("28881621000140", "SuperCool", "860.00", "supercool@gmail.com", "1"),
+          ("24891754000147", "Importado", "350.00", "importado@gmail.com", "1"),
+          ("30879724000118", "McQuay", "150.00", "mcquay@gmail.com", "1");
+
+-- -----------------------------------------------------
 -- Insert into telefone
 -- -----------------------------------------------------
 
-insert into telefone (numero, Fornecedor_CNPJ, cliente_CNPJ, Funcionario_CPF)
+insert into Telefone (numero, Fornecedor_CNPJ, cliente_CNPJ, Funcionario_CPF)
 	value
 		  ("81921216838", "94006115000137", null, null), 
 		  ("81921745843", "50053765000168", null, null),
@@ -135,40 +154,28 @@ insert into telefone (numero, Fornecedor_CNPJ, cliente_CNPJ, Funcionario_CPF)
           ("81930406564", null, null, "78249824407");
 
 -- -----------------------------------------------------
--- Insert itensvenda
+-- Insert into Compras
 -- -----------------------------------------------------
-
-insert into itensvenda (Venda_idVenda, Estoque_codProduto, qntProduto)
-	value 
-		  ("1", "700821", "2"),
-          ("2", "850171", "5"),
-          ("3", "740014", "3"),
-          ("4", "600025", "3"),
-          ("5", "530100", "2"),
-          ("6", "740050", "3"),
-          ("7", "600123", "2"),
-          ("8", "250012", "2"),
-          ("9", "740019", "3"),
-          ("10", "700821", "2");
-
--- -----------------------------------------------------
--- Insert into venda
--- -----------------------------------------------------
-
-insert into venda (dataVenda, valorTotal, obs, cliente_cnpj, Funcionario_CPF)
-	value
-		  ("2022.12.02", "800.00", null, "4335917000106", "85215974155"),
-          ("2022.11.05", "700.00", null, "11346108000157", "85215974155"),
-          ("2022.10.03", "1200.00", null, "27690818000130", "85215974155"),
-          ("2022.09.04", "4000.00", null, "30865274000104", "75365495111"),
-          ("2022.08.10", "950.50", null, "32354618000146", "75365495111"),
-          ("2022.07.12", "3250.00", null, "39165274000176", "75365495111"),
-          ("2022.06.16", "250.35", null, "39165274000176", "12395175333"),
-          ("2022.05.18", "658.00", null, "39165274000176", "12395175333"),
-          ("2022.04.06", "980.00", null, "57541425000125", "12395175333"),
-          ("2022.03.25", "1200.00", null, "57541425000125", "12395175333");
           
-insert into endereco (funcionario_cpf, cliente_cnpj, fornecedor_cnpj, uf, bairro, cidade, rua, comp, numero, cep)
+insert into Compras (Estoque_codProduto, Fornecedor_CNPJ, dataCompra, qtdCompra, valorCompra, obs)
+	value 
+		  ("700821", "94006115000137", "2022.12.02", "10", "500.00", null),
+          ("10029", "50053765000168", "2021.05.05", "5", "600.00", null),
+          ("250012", "46212572000135", "2022.08.21", "6", "700.00", null),
+          ("450210", "94006115000137", "2021.07.25", "50", "250.00", null),
+          ("824400", "24891754000147", "2022.01.15", "20", "400.00", null),
+          ("829900", "30879724000118", "2021.05.05", "15", "900.00", null),
+          ("740012", "24891754000147", "2022.10.10", "16", "650.00", null),
+          ("900002", "94006115000137", "2021.02.15", "20", "450.00", null),
+          ("850171", "28881621000140", "2022.02.15", "25", "300.00", null),
+          ("829900", "30879724000118", "2021.03.06", "30", "750.00", null);
+
+
+
+
+
+
+insert into Endereco (funcionario_cpf, cliente_cnpj, fornecedor_cnpj, uf, bairro, cidade, rua, comp, numero, cep)
 	value
 		  ("12395175333", null, null, "AL", "gruta de lourdes", "Maceio", "Rua Sucupira", null, "125", "50690754"),
           ("18039522293", null, null, "AL", "gruta de lourdes", "Maceio", "Doutor Vicente de Costa", null, "365", "50690752"),
