@@ -60,13 +60,13 @@ Pensando nisso partimos para fazer o mapeamento interno da empresa e como poder�
 
 # Modelo Conceitual
 
-![modeloConceitual_GL_0.1.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloConceitual_GL_0.1.png)
+![image](https://user-images.githubusercontent.com/98968093/207476587-2d5eec75-3cd5-4e4e-b802-d299517d39c4.png)
 
 ---
 
 # Modelo Lógico (MER)
 
-![modeloLogico_GL_04.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloLogico_GL_04.png)
+![image](https://user-images.githubusercontent.com/98968093/207476502-745a7ae3-ab28-4c63-9887-1fa7ad233975.png)
 
 ---
 
@@ -74,7 +74,7 @@ Pensando nisso partimos para fazer o mapeamento interno da empresa e como poder�
 
 ---
 
-## DDL - **Data Definition Language**
+##   DDL - **Data Definition Language**
 
 ### **Criando Banco de dados e tabelas - DDL**
 
@@ -313,9 +313,9 @@ alter table cliente drop column Venda_idVenda;
 drop schema azsolution;
 
 ```
-
 ---
-
+---
+---
 ---
 
 ## DML - Data **Manipulation Language**
@@ -610,9 +610,10 @@ UPDATE venda
 	SET obs = 'Revisar CNPJ deste cliente, pois está com suspeita de fraude. Frizar aos vendedores a necessidade de analisar se o CNPJ fornecedido é oriundo de oficinas ou afins.'
 		WHERE idVenda = 3 and funcionarioCPF = 85215974155;
 ```
-
 ---
-
+---
+---
+---
 ## DQL - **Data Query Language**
 
 ### Consultas
@@ -778,11 +779,10 @@ select f.nome "Funcionário", f.cpf "CPF", f.dataAdm "Data Admissão", f.salario
 				group by (f.cpf)
 					order by f.nome;
 ```
-
 ---
-
 ---
-
+---
+---
 ## PROCEDURE
 
 > 01
@@ -932,17 +932,22 @@ delimiter ;
 
 > 10
 > 
-
 ---
-
+---
+---
+---
 ## FUNCTION
 
 ---
-
+---
+---
+---
 ## VIEW
 
 ---
-
+---
+---
+---
 ### Squad 01 - Avestruz Solutions
 
 Apolo Nicolas
