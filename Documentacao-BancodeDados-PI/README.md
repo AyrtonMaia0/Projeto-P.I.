@@ -9,7 +9,7 @@
     - [x]  o Modelagem relacional (MR)
 - [x]  Crie um documento simples do seu projeto de Banco de Dados para o PI que
 tenha as sessões (É OBRIGATÓRIO A CRIAÇÃO DESSE DOCUMENTO):
-    - [ ]  o Descreva em mais detalhes o minimundo do seu PI;
+    - [x]  o Descreva em mais detalhes o minimundo do seu PI;
     - [ ]  o Descreva o modelo lógico (Diagrama MER);
     - [ ]  o Descreva o modelo físico (Diagrama MR);
     - [ ]  o Anexe a esse documento os Scripts abaixo de uma forma organizada
@@ -17,22 +17,22 @@ tenha as sessões (É OBRIGATÓRIO A CRIAÇÃO DESSE DOCUMENTO):
 - [x]  Crie um script que irá conter todos dos scripts de criação
 (DDL) das tabelas e views do seu banco de dados (Todos os
 CREATES TABLE...);
-- [ ]  Crie alguns scripts (no mínimo 5) para **alterar** (DDL) as
+- [x]  Crie alguns scripts (no mínimo 5) para **alterar** (DDL) as
 estruturas das tabelas;
 - [ ]  Crie um script para destruir (DDL) todas as **tabelas**, **views**,
 **procedimentos**, **funções** e **dependências** do seu banco de
 dados;
-- [ ]  Crie um script que irá realizar todos os **inserts** (DML) nas
+- [x]  Crie um script que irá realizar todos os **inserts** (DML) nas
 tabelas do seu banco de dados. Cada tabela deve ter no
 mínimo 10 registros, use o bom senso;
-- [ ]  Crie scripts (no mínimo 10) para **deletar** ou **atualizar** (DML)
+- [x]  Crie scripts (no mínimo 10) para **deletar** ou **atualizar** (DML)
 os dados inseridos nas tabelas.
-- [ ]  Crie um script que irá realizar as suas
+- [x]  Crie um script que irá realizar as suas
 **consultas/perguntas/relatórios (DQL)**, é obrigatório uso
 de **join** e **subselect** na maioria das consultas. Devem criar no
 mínimo 20 scripts de SELECT. Descreva casa uma das
 consultas para que foram elaboradas.
-- [ ]  Crie um script para criar as **views (DDL)** (no mínimo 10) dos
+- [x]  Crie um script para criar as **views (DDL)** (no mínimo 10) dos
 principais relatórios do seu projeto.
 - [ ]  Crie um script que irá criar e executar as procedures e
 **funções** do seu banco de dados. Use o SP/SQL, como
@@ -306,7 +306,6 @@ drop schema azsolution;
 
 ```
 
-### Views - DDL
 
 ---
 
