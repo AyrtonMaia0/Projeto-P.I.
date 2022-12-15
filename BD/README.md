@@ -62,10 +62,10 @@ Pensando nisso partimos para fazer o mapeamento interno da empresa e como poder�
 
 # Modelo Conceitual
 
-![modeloConceitual_GL_0.1.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloConceitual_GL_0.1.png)
-
+![image](https://user-images.githubusercontent.com/98968093/207747003-a799fd61-c6fc-4bd6-a7ec-e422ddb16fb0.png)
 Por meio de um diagrama BPMN conseguimos observar melhor as seções existentes na empresa GL Refrigeração.
 
+---
 A distribuidora tem seu processo de compra dos produtos por meio do seu fornecedor.
 
 O sistema de vendas se trata diretamente com o funcionário (nesse caso, o vendedor-caixa), que se conecta diretamente para o cliente.
@@ -74,8 +74,7 @@ O sistema de vendas se trata diretamente com o funcionário (nesse caso, o vende
 
 # Modelo Lógico (MER)
 
-![modeloLogico_GL_04.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloLogico_GL_04.png)
-
+![image](https://user-images.githubusercontent.com/98968093/207747133-576faea5-1b9d-4383-9255-a899f15e1635.png)
 ---
 
 # Modelo Físico (MR)
