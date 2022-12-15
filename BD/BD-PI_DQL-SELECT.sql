@@ -198,7 +198,3 @@ select v.datavenda"Data Venda", v.valorTotal"Valor Total Venda", f.nome"Funciona
 		inner join funcionario f on f.cpf = v.funcionario_cpf
         inner join cliente c on c.cnpj = v.cliente_cnpj
 			where v.idvenda like 1;
-
-
-	
-
