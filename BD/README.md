@@ -14,16 +14,16 @@
 - [x]  Crie um documento simples do seu projeto de Banco de Dados para o PI que
 tenha as sessões (É OBRIGATÓRIO A CRIAÇÃO DESSE DOCUMENTO):
     - [x]  o Descreva em mais detalhes o minimundo do seu PI;
-    - [ ]  o Descreva o modelo lógico (Diagrama MER);
-    - [ ]  o Descreva o modelo físico (Diagrama MR);
-    - [ ]  o Anexe a esse documento os Scripts abaixo de uma forma organizada
+    - [x]  o Descreva o modelo lógico (Diagrama MER);
+    - [x]  o Descreva o modelo físico (Diagrama MR);
+    - [x]  o Anexe a esse documento os Scripts abaixo de uma forma organizada
     e bem documentada.
 - [x]  Crie um script que irá conter todos dos scripts de criação
 (DDL) das tabelas e views do seu banco de dados (Todos os
 CREATES TABLE...);
 - [x]  Crie alguns scripts (no mínimo 5) para **alterar** (DDL) as
 estruturas das tabelas;
-- [ ]  Crie um script para destruir (DDL) todas as **tabelas**, **views**,
+- [x]  Crie um script para destruir (DDL) todas as **tabelas**, **views**,
 **procedimentos**, **funções** e **dependências** do seu banco de
 dados;
 - [x]  Crie um script que irá realizar todos os **inserts** (DML) nas
@@ -38,11 +38,11 @@ mínimo 20 scripts de SELECT. Descreva casa uma das
 consultas para que foram elaboradas.
 - [x]  Crie um script para criar as **views (DDL)** (no mínimo 10) dos
 principais relatórios do seu projeto.
-- [ ]  Crie um script que irá criar e executar as procedures e
+- [x]  Crie um script que irá criar e executar as procedures e
 **funções** do seu banco de dados. Use o SP/SQL, como
 colocado em sala de aula, e devem fazer no mínimo 10
 **procedures/funçõe**s;
-- [ ]  Crie um script que irá criar e executar corretamente as
+- [x]  Crie um script que irá criar e executar corretamente as
 triggers do seu banco de dados. Use o SP/SQL, como colocado
 em sala de aula, e devem fazer no mínimo 6 **triggers**;
 
@@ -52,7 +52,9 @@ em sala de aula, e devem fazer no mínimo 6 **triggers**;
 
 Nosso Banco de Dados foi criado com base no Projeto vinculado com a cadeira ‘Unidade de Extensão’, com o **Projeto Integrador.**
 
-Obtivemos um contato com a empresa **GL Refrigeração.** Com base nas reuniões com a distribuidora, vimos que havia um problema interno de Gestão, tanto na parte de cadastro dos pedidos de compra e venda com os clientes, como também dos produtos que chegam dos carregamentos para abastecimento do estoque.
+Obtivemos um contato com a empresa **GL Refrigeração**, que é uma ditribuidora de peças automotivas**.** 
+
+Com base nas reuniões com a distribuidora, vimos que havia um problema interno de Gestão, tanto na parte de cadastro dos pedidos de compra e venda com os clientes, como também dos produtos que chegam dos carregamentos para abastecimento do estoque.
 
 Pensando nisso partimos para fazer o mapeamento interno da empresa e como poderíamos melhorar esse sistema de gerenciamento.
 
@@ -60,13 +62,19 @@ Pensando nisso partimos para fazer o mapeamento interno da empresa e como poder�
 
 # Modelo Conceitual
 
-![image](https://user-images.githubusercontent.com/98968093/207476587-2d5eec75-3cd5-4e4e-b802-d299517d39c4.png)
+![modeloConceitual_GL_0.1.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloConceitual_GL_0.1.png)
+
+Por meio de um diagrama BPMN conseguimos observar melhor as seções existentes na empresa GL Refrigeração.
+
+A distribuidora tem seu processo de compra dos produtos por meio do seu fornecedor.
+
+O sistema de vendas se trata diretamente com o funcionário (nesse caso, o vendedor-caixa), que se conecta diretamente para o cliente.
 
 ---
 
 # Modelo Lógico (MER)
 
-![image](https://user-images.githubusercontent.com/98968093/207476502-745a7ae3-ab28-4c63-9887-1fa7ad233975.png)
+![modeloLogico_GL_04.png](Avestruz%20Solutions%20-%20GL%20Refrigerac%CC%A7o%CC%83es%20-%20Banco%20de%20ed618301c9264c9e9d4a05c0852e9fe6/modeloLogico_GL_04.png)
 
 ---
 
@@ -74,19 +82,19 @@ Pensando nisso partimos para fazer o mapeamento interno da empresa e como poder�
 
 ---
 
-##   DDL - **Data Definition Language**
+## DDL - **Data Definition Language**
 
-### **Criando Banco de dados e tabelas - DDL**
+### **Criando Banco de Dados e Tabelas - DDL**
 
 > Criação do Banco de Dados
 > 
 
 ```sql
 -- -----------------------------------------------------
--- Schema AZSolution
+-- Schema GLRefrigeracao
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `AZSolution` DEFAULT CHARACTER SET utf8 ;
-USE `AZSolution` ;
+CREATE SCHEMA IF NOT EXISTS `GLRefrigeracao` DEFAULT CHARACTER SET utf8 ;
+USE `GLRefrigeracao` ;
 ```
 
 > Criação da Tabela Funcionário
@@ -94,19 +102,18 @@ USE `AZSolution` ;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Funcionario`
+-- Table `GLRefrigeracao`.`Funcionario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Funcionario` (
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Funcionario` (
   `CPF` BIGINT(11) NOT NULL,
   `nome` VARCHAR(120) NOT NULL,
-  `email` VARCHAR(150) NOT NULL,
+  `email` VARCHAR(120) NOT NULL,
   `salario` DECIMAL(8,2) NOT NULL,
   `dataAdm` DATE NOT NULL,
-  `dataDem` DATE NULL,
+  `dataDem` DATE,
   `status` TINYINT NOT NULL,
-  `Funcao` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`CPF`),
-  UNIQUE INDEX `CPF_UNIQUE` (`CPF` ASC) VISIBLE)
+  `funcao` VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`CPF`))
 ENGINE = InnoDB;
 ```
 
@@ -115,20 +122,27 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Venda`
+-- Table `GLRefrigeracao`.`Venda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Venda` (
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Venda` (
   `idVenda` INT NOT NULL AUTO_INCREMENT,
   `dataVenda` DATE NOT NULL,
   `valorTotal` DECIMAL(8,2) NOT NULL,
   `obs` VARCHAR(200) NULL,
   `Funcionario_CPF` BIGINT(11) NOT NULL,
+  `Cliente_CNPJ` BIGINT(14) NOT NULL,
   PRIMARY KEY (`idVenda`),
   UNIQUE INDEX `idVenda_UNIQUE` (`idVenda` ASC) VISIBLE,
-  INDEX `fk_Venda_Funcionario_idx` (`Funcionario_CPF` ASC) VISIBLE,
-  CONSTRAINT `fk_Venda_Funcionario`
+  INDEX `fk_Venda_Funcionario1_idx` (`Funcionario_CPF` ASC) VISIBLE,
+  INDEX `fk_Venda_Cliente1_idx` (`Cliente_CNPJ` ASC) VISIBLE,
+  CONSTRAINT `fk_Venda_Funcionario1`
     FOREIGN KEY (`Funcionario_CPF`)
-    REFERENCES `AZSolution`.`Funcionario` (`CPF`)
+    REFERENCES `GLRefrigeracao`.`Funcionario` (`CPF`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Venda_Cliente1`
+    FOREIGN KEY (`Cliente_CNPJ`)
+    REFERENCES `GLRefrigeracao`.`Cliente` (`CNPJ`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -139,13 +153,13 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Cliente`
+-- Table `GLRefrigeracao`.`Cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Cliente` (
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Cliente` (
   `CNPJ` BIGINT(14) NOT NULL,
-  `nomeCliente` VARCHAR(120) NOT NULL,
+  `nome` VARCHAR(120) NOT NULL,
   `email` VARCHAR(150) NOT NULL,
-	PRIMARY KEY (`CNPJ`),
+  PRIMARY KEY (`CNPJ`),
   UNIQUE INDEX `CNPJ_UNIQUE` (`CNPJ` ASC) VISIBLE)
 ENGINE = InnoDB;
 ```
@@ -155,19 +169,17 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Estoque`
+-- Table `GLRefrigeracao`.`Estoque`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Estoque` (
-  `codProduto` BIGINT(14) NOT NULL,
-  `nomeProduto` VARCHAR(120) NOT NULL,
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Estoque` (
+  `codProduto` VARCHAR(30) NOT NULL,
+  `nome` VARCHAR(180) NOT NULL,
   `marca` VARCHAR(45) NOT NULL,
   `preco` DECIMAL(8,2) NOT NULL,
+  `qnt` INT NOT NULL,
   `codBarras` BIGINT(13) NULL,
-  `largura` DECIMAL(6,2) NULL,
-  `altura` DECIMAL(6,2) NULL,
-  `comprimento` VARCHAR(45) NULL,
-  `table1col` DECIMAL(6,2) NULL,
-  `circunferencia` DECIMAL(6,2) NULL,
+  `dimensoes` VARCHAR(100) NULL,
+  `circunferencia` DECIMAL(5,2) NULL,
   PRIMARY KEY (`codProduto`),
   UNIQUE INDEX `codProduto_UNIQUE` (`codProduto` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -178,23 +190,23 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`itensVenda`
+-- Table `GLRefrigeracao`.`itensVenda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`itensVenda` (
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`itensVenda` (
   `Venda_idVenda` INT NOT NULL,
-  `Estoque_codProduto` BIGINT(14) NOT NULL,
-  `qtdProduto` DECIMAL(6,2) NOT NULL,
+  `Estoque_codProduto` VARCHAR(30) NOT NULL,
+  `qntProduto` INT NOT NULL,
   PRIMARY KEY (`Venda_idVenda`, `Estoque_codProduto`),
   INDEX `fk_Venda_has_Estoque_Estoque1_idx` (`Estoque_codProduto` ASC) VISIBLE,
   INDEX `fk_Venda_has_Estoque_Venda1_idx` (`Venda_idVenda` ASC) VISIBLE,
   CONSTRAINT `fk_Venda_has_Estoque_Venda1`
     FOREIGN KEY (`Venda_idVenda`)
-    REFERENCES `AZSolution`.`Venda` (`idVenda`)
+    REFERENCES `GLRefrigeracao`.`Venda` (`idVenda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Venda_has_Estoque_Estoque1`
     FOREIGN KEY (`Estoque_codProduto`)
-    REFERENCES `AZSolution`.`Estoque` (`codProduto`)
+    REFERENCES `GLRefrigeracao`.`Estoque` (`codProduto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -205,16 +217,15 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Fornecedor`
+-- Table `GLRefrigeracao`.`Fornecedor`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Fornecedor` (
-  `CNPJ` BIGINT(13) NOT NULL,
-  `nomeFornecedor` VARCHAR(120) NOT NULL,
-  `valorFrete` DECIMAL(8,2) NOT NULL,
-  `email` VARCHAR(150) NOT NULL,
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Fornecedor` (
+  `CNPJ` BIGINT(14) NOT NULL,
+  `nome` VARCHAR(120) NOT NULL,
+  `valorFrete` DECIMAL(6,2) NOT NULL,
   `status` TINYINT NOT NULL,
-  UNIQUE INDEX `CPF_UNIQUE` (`CNPJ` ASC) VISIBLE,
-  PRIMARY KEY (`CNPJ`))
+  PRIMARY KEY (`CNPJ`),
+  UNIQUE INDEX `CNPJ_UNIQUE` (`CNPJ` ASC) VISIBLE)
 ENGINE = InnoDB;
 ```
 
@@ -223,32 +234,32 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Telefone`
+-- Table `GLRefrigeracao`.`Telefone`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Telefone` (
-  `idTelefone` INT NOT NULL,
-  `numero` BIGINT(11) NOT NULL,
-  `Fornecedor_CNPJ` BIGINT(13) NOT NULL,
-  `Cliente_CNPJ` BIGINT(14) NOT NULL,
-  `Funcionario_CPF` BIGINT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Telefone` (
+  `idTelefone` INT NOT NULL AUTO_INCREMENT,
+  `numero` BIGINT(13) NULL,
+  `Fornecedor_CNPJ` BIGINT(14),
+  `Cliente_CNPJ` BIGINT(14),
+  `Funcionario_CPF` BIGINT(11),
   PRIMARY KEY (`idTelefone`),
-  UNIQUE INDEX `numero_UNIQUE` (`numero` ASC) VISIBLE,
-  INDEX `fk_Telefone_Fornecedor1_idx` (`Fornecedor_CNPJ` ASC) VISIBLE,
-  INDEX `fk_Telefone_Cliente1_idx` (`Cliente_CNPJ` ASC) VISIBLE,
+  UNIQUE INDEX `idTelefone_UNIQUE` (`idTelefone` ASC) VISIBLE,
   INDEX `fk_Telefone_Funcionario1_idx` (`Funcionario_CPF` ASC) VISIBLE,
-  CONSTRAINT `fk_Telefone_Fornecedor1`
-    FOREIGN KEY (`Fornecedor_CNPJ`)
-    REFERENCES `AZSolution`.`Fornecedor` (`CNPJ`)
+  INDEX `fk_Telefone_Cliente1_idx` (`Cliente_CNPJ` ASC) VISIBLE,
+  INDEX `fk_Telefone_Fornecedor1_idx` (`Fornecedor_CNPJ` ASC) VISIBLE,
+  CONSTRAINT `fk_Telefone_Funcionario1`
+    FOREIGN KEY (`Funcionario_CPF`)
+    REFERENCES `GLRefrigeracao`.`Funcionario` (`CPF`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Telefone_Cliente1`
     FOREIGN KEY (`Cliente_CNPJ`)
-    REFERENCES `AZSolution`.`Cliente` (`CNPJ`)
+    REFERENCES `GLRefrigeracao`.`Cliente` (`CNPJ`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Telefone_Funcionario1`
-    FOREIGN KEY (`Funcionario_CPF`)
-    REFERENCES `AZSolution`.`Funcionario` (`CPF`)
+  CONSTRAINT `fk_Telefone_Fornecedor1`
+    FOREIGN KEY (`Fornecedor_CNPJ`)
+    REFERENCES `GLRefrigeracao`.`Fornecedor` (`CNPJ`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -259,28 +270,27 @@ ENGINE = InnoDB;
 
 ```sql
 -- -----------------------------------------------------
--- Table `AZSolution`.`Compras`
+-- Table `GLRefrigeracao`.`Compras`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AZSolution`.`Compras` (
-  `idCompra` VARCHAR(45) NOT NULL,
-  `Estoque_codProduto` BIGINT(14) NOT NULL,
-  `Fornecedor_CNPJ` BIGINT(13) NOT NULL,
-  `dataCompra` DATE NOT NULL,
-  `qtdCompra` DATE NOT NULL,
+CREATE TABLE IF NOT EXISTS `GLRefrigeracao`.`Compras` (
+  `idCompras` INT NOT NULL AUTO_INCREMENT,
+  `Fornecedor_CNPJ` BIGINT(14) NOT NULL,
+  `Estoque_codProduto` VARCHAR(30) NOT NULL,
+  `dataComp` DATE NOT NULL,
+  `qtdCompra` INT NOT NULL,
   `valorCompra` DECIMAL(8,2) NOT NULL,
-  `obs` VARCHAR(200) NULL,
-  PRIMARY KEY (`idCompra`, `Estoque_codProduto`, `Fornecedor_CNPJ`),
-  INDEX `fk_Estoque_has_Fornecer_Estoque1_idx` (`Estoque_codProduto` ASC) VISIBLE,
-  UNIQUE INDEX `idCompra_UNIQUE` (`idCompra` ASC) VISIBLE,
-  INDEX `fk_Compras_Fornecedor1_idx` (`Fornecedor_CNPJ` ASC) VISIBLE,
-  CONSTRAINT `fk_Estoque_has_Fornecer_Estoque1`
+  `obs` VARCHAR(280) NULL,
+  PRIMARY KEY (`idCompras`, `Fornecedor_CNPJ`, `Estoque_codProduto`),
+  INDEX `fk_Estoque_has_Fornecedor_Fornecedor1_idx` (`Fornecedor_CNPJ` ASC) VISIBLE,
+  INDEX `fk_Estoque_has_Fornecedor_Estoque1_idx` (`Estoque_codProduto` ASC) VISIBLE,
+  CONSTRAINT `fk_Estoque_has_Fornecedor_Estoque1`
     FOREIGN KEY (`Estoque_codProduto`)
-    REFERENCES `AZSolution`.`Estoque` (`codProduto`)
+    REFERENCES `GLRefrigeracao`.`Estoque` (`codProduto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Compras_Fornecedor1`
+  CONSTRAINT `fk_Estoque_has_Fornecedor_Fornecedor1`
     FOREIGN KEY (`Fornecedor_CNPJ`)
-    REFERENCES `AZSolution`.`Fornecedor` (`CNPJ`)
+    REFERENCES `GLRefrigeracao`.`Fornecedor` (`CNPJ`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -289,17 +299,50 @@ ENGINE = InnoDB;
 ### Alteração de Dados das Tabelas -DDL
 
 ```sql
-alter table estoque add column dimensoes varchar(50) after codBarras;
-alter table estoque change codProduto codProduto varchar(30);
-alter table funcionario change Funcao funcao varchar(80);
-alter table estoque add column dimensoes varchar(50) after codBarras;
-alter table estoque add column qtd varchar(50) after circunferencia;
+-- -----------------------------------------------------
+-- Alterar estrutura das tabelas (os mesmos comandos estão no arquivo BD-PI-DDL-ALTER.sql)
+-- -----------------------------------------------------
+ALTER TABLE `GLRefrigeracao`.`Fornecedor` ADD COLUMN `email` VARCHAR(256) NULL AFTER `valorFrete`,
+	ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE;
+;
 
-alter table estoque drop column altura;
-alter table estoque drop column largura;
-alter table estoque drop column comprimento;
-alter table estoque drop column table1col;
-alter table cliente drop column Venda_idVenda;
+ALTER TABLE Funcionario DROP COLUMN dataDem;
+
+ALTER TABLE Funcionario ADD COLUMN dataDem DATE AFTER dataAdm;
+
+ALTER TABLE Estoque CHANGE dimensoes dimensoes VARCHAR(120);
+
+ALTER TABLE `GLRefrigeracao`.`Endereco` ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST,
+	DROP PRIMARY KEY,
+	ADD PRIMARY KEY (`id`);
+;
+
+ALTER TABLE `GLRefrigeracao`.`Endereco` 
+DROP FOREIGN KEY `fk_Endereco_Cliente1`,
+DROP FOREIGN KEY `fk_Endereco_Fornecedor1`,
+DROP FOREIGN KEY `fk_Endereco_Funcionario1`;
+
+ALTER TABLE `GLRefrigeracao`.`Endereco` 
+CHANGE COLUMN `Funcionario_CPF` `Funcionario_CPF` BIGINT(11) NULL ,
+CHANGE COLUMN `Cliente_CNPJ` `Cliente_CNPJ` BIGINT(14) NULL ,
+CHANGE COLUMN `Fornecedor_CNPJ` `Fornecedor_CNPJ` BIGINT(14) NULL ;
+
+ALTER TABLE `GLRefrigeracao`.`Endereco` 
+ADD CONSTRAINT `fk_Endereco_Cliente1`
+  FOREIGN KEY (`Cliente_CNPJ`)
+  REFERENCES `GLRefrigeracao`.`Cliente` (`CNPJ`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_Endereco_Fornecedor1`
+  FOREIGN KEY (`Fornecedor_CNPJ`)
+  REFERENCES `GLRefrigeracao`.`Fornecedor` (`CNPJ`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_Endereco_Funcionario1`
+  FOREIGN KEY (`Funcionario_CPF`)
+  REFERENCES `GLRefrigeracao`.`Funcionario` (`CPF`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 
 ```
 
@@ -310,12 +353,34 @@ alter table cliente drop column Venda_idVenda;
 -- Destruir DDL
 -- -----------------------------------------------------
 
-drop schema azsolution;
+DROP TABLE `GLRefrigeracao`.`FormaPagComp`;
+
+DROP TABLE `GLRefrigeracao`.`FormaPag`;
+
+DROP TABLE `GLRefrigeracao`.`Endereco`;
+
+DROP TABLE `GLRefrigeracao`.`itensVenda`;
+
+DROP TABLE `GLRefrigeracao`.`Compras`;
+
+DROP TABLE `GLRefrigeracao`.`Estoque`;
+
+DROP TABLE `GLRefrigeracao`.`Telefone`;
+
+DROP TABLE `GLRefrigeracao`.`Fornecedor`;
+
+DROP TABLE `GLRefrigeracao`.`Venda`;
+
+DROP TABLE `GLRefrigeracao`.`Cliente`;
+
+DROP TABLE `GLRefrigeracao`.`Funcionario`;
+
+DROP SCHEMA `GLRefrigeracao`;
 
 ```
+
 ---
----
----
+
 ---
 
 ## DML - Data **Manipulation Language**
@@ -327,35 +392,29 @@ drop schema azsolution;
 
 ```sql
 -- -----------------------------------------------------
--- Insert into fornecedor
+-- INSERT INTO fornecedor
 -- -----------------------------------------------------
-
-INSERT INTO (fornecedor (CNPJ, nomeFornecedor, valorFrete, email, status)
-	VALUE 
-		("94006115000137", "Royce Connect", "600.00", "royceconect@gmail.com", "1"),
-		("50053765000168", "Spin", "350.00", "spin@gmail.com", "1"),
-	  ("46212572000135", "Delphi", "250.00", "delphi@gmail.com", "1"),
-	  ("28881621000140", "SuperCool", "860.00", "supercool@gmail.com", "1"),
-	  ("24891754000147", "Importado", "350.00", "importado@gmail.com", "1"),
-	  ("30879724000118", "McQuay", "150.00", "mcquay@gmail.com", "1");
+INSERT INTO Fornecedor (CNPJ, nome, valorFrete, email, `status`)
+	VALUE ("94006115000137", "Royce Connect", "600.00", "royceconect@gmail.com", "1"),
+		  ("50053765000168", "Spin", "350.00", "spin@gmail.com", "1"),
+          ("46212572000135", "Delphi", "250.00", "delphi@gmail.com", "1"),
+          ("28881621000140", "SuperCool", "860.00", "supercool@gmail.com", "1"),
+          ("24891754000147", "Importado", "350.00", "importado@gmail.com", "1"),
+          ("30879724000118", "McQuay", "150.00", "mcquay@gmail.com", "1");
 ```
 
 > Inserindo Dados na Tabela Funcionário
 > 
 
 ```sql
--- -----------------------------------------------------
--- Insert into funcionario
--- -----------------------------------------------------
-
-INSERT INTO funcionario (CPF, nome, email, salario, dataAdm, dataDem, status, funcao)
-	VALUES 
-		("85215974155", "Maria Lima", "marialima@gmail.com", "2000", "2022.11.29", null, "1", "Vendedor"),
-    ("75365495111", "Gilmar Adrian", "gilmaradrian@gmail.com","2000", "2020.08.21", null, "1", "Vendedor"),
-    ("12395175333", "Livia Vitoria", "liviavitoria@gmail.com",  "2000", "2020.09.05", null, "1", "Vendedor"),
-    ("18039522293", "Ayrton Maia", "ayrtonmaia@gail.com",  "2000", "2018.07.01", null, "1", "Caixa"),
-    ("75120273114", "Danilo Farias", "danilofarias@gmail.com",  "3500", "2010.01.02", null, "1", "Gerente"),
-    ("78249824407", "Jaqueline Lins", "jaquelinelins@gmal.com", "8000", "2009.06.15", null, "1", "CEO");
+INSERT INTO Funcionario (CPF, nome, email, salario, dataAdm, dataDem, `status`, funcao)
+	VALUE 
+		  ("85215974155", "Maria Lima", "marialima@gmail.com", "2000", "2022.11.29", NULL, "1", "Vendedor"),
+          ("75365495111", "Gilmar Adrian", "gilmaradrian@gmail.com","2000", "2020.08.21", NULL, "1", "Vendedor"),
+          ("12395175333", "Livia Vitoria", "liviavitoria@gmail.com",  "2000", "2020.09.05", NULL, "1", "Vendedor"),
+          ("18039522293", "Ayrton Maia", "ayrtonmaia@gail.com",  "2000", "2018.07.01", NULL, "1", "Caixa"),
+          ("75120273114", "Danilo Farias", "danilofarias@gmail.com",  "3500", "2010.01.02", NULL, "1", "Gerente"),
+          ("78249824407", "Jaqueline Lins", "jaquelinelins@gmal.com", "8000", "2009.06.15", NULL, "1", "CEO");
 ```
 
 > Inserindo Dados na Tabela Cliente
@@ -365,29 +424,28 @@ INSERT INTO funcionario (CPF, nome, email, salario, dataAdm, dataDem, status, fu
 -- -----------------------------------------------------
 -- Insert cliente
 -- -----------------------------------------------------
-
-INSERT INTO cliente (CNPJ, nomeCliente, email)
+INSERT INTO Cliente (CNPJ, nome, email)
 	VALUE 
-		("81583383000170", "OficinaA", "oficinaa@gmail.com"),
-		("51451416000167", "OficinaB", "oficinab@gmail.com"),
-    ("65778296000111", "OficinaC", "oficinac@gmail.com"),
-    ("41437483000173", "OficinaD", "oficinad@gmail.com"),
-    ("32354618000146", "OficinaE", "oficinae@gmail.com"),
-    ("43945444000108", "OficinaF", "oficinaf@gmail.com"),
-    ("43945444000102", "OficinaG", "oficinag@gmail.com"),
-    ("57541425000125", "OficinaH", "oficinah@gmail.com"),
-    ("04335917000106", "OficinaI", "oficinai@gmail.com"),
-    ("27690818000130", "OficinaJ", "oficinaj@gmail.com"),
-    ("39165274000176", "OficinaK", "oficinak@gmail.com"),
-    ("86197624000166", "OficinaL", "oficinal@gmail.com"),
-    ("11346108000157", "OficinaM", "oficinam@gmail.com"),
-    ("48248458000190", "OficinaN", "oficinan@gmail.com"),
-    ("30865274000104", "OficinaO", "oficinao@gmail.com"),
-    ("85214715000108", "OficinaP", "oficinap@gmail.com"),
-    ("32605925000152", "OficinaQ", "oficinaq@gmail.com"),
-    ("77743700000109", "OficinaR", "oficinar@gmail.com"),
-    ("73685215000167", "OficinaS", "oficinas@gmail.com"),
-    ("78421344000161", "OficinaX", "oficinax@gmail.com");
+		  ("81583383000170", "OficinaA", "oficinaa@gmail.com"),
+		  ("51451416000167", "OficinaB", "oficinab@gmail.com"),
+          ("65778296000111", "OficinaC", "oficinac@gmail.com"),
+          ("41437483000173", "OficinaD", "oficinad@gmail.com"),
+          ("32354618000146", "OficinaE", "oficinae@gmail.com"),
+          ("43945444000108", "OficinaF", "oficinaf@gmail.com"),
+          ("43945444000102", "OficinaG", "oficinag@gmail.com"),
+          ("57541425000125", "OficinaH", "oficinah@gmail.com"),
+          ("04335917000106", "OficinaI", "oficinai@gmail.com"),
+          ("27690818000130", "OficinaJ", "oficinaj@gmail.com"),
+          ("39165274000176", "OficinaK", "oficinak@gmail.com"),
+          ("86197624000166", "OficinaL", "oficinal@gmail.com"),
+          ("11346108000157", "OficinaM", "oficinam@gmail.com"),
+          ("48248458000190", "OficinaN", "oficinan@gmail.com"),
+          ("30865274000104", "OficinaO", "oficinao@gmail.com"),
+          ("85214715000108", "OficinaP", "oficinap@gmail.com"),
+          ("32605925000152", "OficinaQ", "oficinaq@gmail.com"),
+          ("77743700000109", "OficinaR", "oficinar@gmail.com"),
+          ("73685215000167", "OficinaS", "oficinas@gmail.com"),
+          ("78421344000161", "OficinaX", "oficinax@gmail.com");
 ```
 
 > Inserindo Dados na Tabela Compras
@@ -395,21 +453,21 @@ INSERT INTO cliente (CNPJ, nomeCliente, email)
 
 ```sql
 -- -----------------------------------------------------
--- Insert into Compras
+-- INSERT INTO Compras
 -- -----------------------------------------------------
           
-INSERT INTO compras (idCompra, Estoque_codProduto, Fornecedor_CNPJ, dataCompra, qtdCompra, valorCompra, obs)
+INSERT INTO Compras (Estoque_codProduto, Fornecedor_CNPJ, dataComp, qtdCompra, valorCompra, obs)
 	VALUE 
-		("1", "700821", "94006115000137", "2022.12.02", "5", "500.00", null),
-    ("2", "10029", "50053765000168", "2021.05.05", "5", "600.00", null),
-    ("3", "250012", "46212572000135", "2022.08.21", "6", "700.00", null),
-    ("4", "450210", "94006115000137", "2021.07.25", "50", "250.00", null),
-    ("12", "824400", "24891754000147", "2022.01.15", "20", "400.00", null),
-    ("6", "829900", "30879724000118", "2021.05.05", "15", "900.00", null),
-    ("7", "740012", "24891754000147", "2022.10.10", "16", "650.00", null),
-    ("8", "900002", "94006115000137", "2021.02.15", "20", "450.00", null),
-    ("9", "850171", "28881621000140", "2022.02.15", "25", "300.00", null),
-    ("10", "829900", "30879724000118", "2021.03.06", "30", "750.00", null);
+		  ("700821", "94006115000137", "2022.12.02", "10", "500.00", NULL),
+          ("10029", "50053765000168", "2021.05.05", "5", "600.00", NULL),
+          ("250012", "46212572000135", "2022.08.21", "6", "700.00", NULL),
+          ("450210", "94006115000137", "2021.07.25", "50", "250.00", NULL),
+          ("824400", "24891754000147", "2022.01.15", "20", "400.00", NULL),
+          ("829900", "30879724000118", "2021.05.05", "15", "900.00", NULL),
+          ("740012", "24891754000147", "2022.10.10", "16", "650.00", NULL),
+          ("900002", "94006115000137", "2021.02.15", "20", "450.00", NULL),
+          ("850171", "28881621000140", "2022.02.15", "25", "300.00", NULL),
+          ("829900", "30879724000118", "2021.03.06", "30", "750.00", NULL);
 ```
 
 > Inserindo Dados na Tabela Estoque
@@ -448,43 +506,45 @@ INSERT INTO estoque (codProduto, nomeProduto, marca, preco, codBarras, dimensoes
 
 ```sql
 -- -----------------------------------------------------
--- Insert into telefone
+-- INSERT INTO Telefone
 -- -----------------------------------------------------
 
-INSERT INTO telefone (numero, Fornecedor_CNPJ, cliente_CNPJ, Funcionario_CPF)
-	VALUES
-		("81921216838", "94006115000137", null, null), 
-		("81921745843", "50053765000168", null, null),
-    ("81937435782", "46212572000135", null, null),
-    ("98927730805", "28881621000140", null, null),
-    ("88938306443", "24891754000147", null, null),
-    ("88938306443", "30879724000118", null, null),
-    ("81938681812", null, "81583383000170", null),
-    ("81925737616", null, "51451416000167", null),
-    ("81932277607", null, "65778296000111", null),
-    ("81925922611", null, "41437483000173", null),
-    ("81939389366", null, "32354618000146", null),
-    ("81932875488", null, "43945444000102", null),
-    ("81933339128", null, "43945444000102", null),
-    ("81938793128", null, "57541425000125", null),
-    ("81925427897", null, "04335917000106", null),
-    ("81925597814", null, "27690818000130", null),
-    ("79922317373", null, "39165274000176", null),
-    ("35927143293", null, "86197624000166", null),
-    ("87929033148", null, "11346108000157", null),
-    ("68936348182", null, "48248458000190", null),
-    ("19927323243", null, "30865274000104", null),
-    ("94930630597", null, "85214715000108", null),
-    ("21932639738", null, "32605925000152", null),
-    ("81929587142", null, "77743700000109", null),
-    ("87920308075", null, "73685215000167", null),
-    ("81939982501", null, "78421344000161", null),    
-    ("81939882455", null, null, "85215974155"),
-    ("81920843358", null, null, "75365495111"),
-    ("81921468914", null, null, "12395175333"),
-    ("81936676699", null, null, "18039522293"),
-    ("81937476247", null, null, "75120273114"),
-    ("81930406564", null, null, "78249824407");
+INSERT INTO Telefone (numero, Fornecedor_CNPJ, cliente_CNPJ, Funcionario_CPF)
+	VALUE
+		  ("81921216838", "94006115000137", NULL, NULL), 
+		  ("81921745843", "50053765000168", NULL, NULL),
+          ("81937435782", "46212572000135", NULL, NULL),
+          ("98927730805", "28881621000140", NULL, NULL),
+          ("88938306443", "24891754000147", NULL, NULL),
+          ("88938306443", "30879724000118", NULL, NULL),
+          
+          ("81938681812", NULL, "81583383000170", NULL),
+          ("81925737616", NULL, "51451416000167", NULL),
+          ("81932277607", NULL, "65778296000111", NULL),
+          ("81925922611", NULL, "41437483000173", NULL),
+          ("81939389366", NULL, "32354618000146", NULL),
+          ("81932875488", NULL, "43945444000102", NULL),
+          ("81933339128", NULL, "43945444000102", NULL),
+          ("81938793128", NULL, "57541425000125", NULL),
+          ("81925427897", NULL, "04335917000106", NULL),
+          ("81925597814", NULL, "27690818000130", NULL),
+          ("79922317373", NULL, "39165274000176", NULL),
+          ("35927143293", NULL, "86197624000166", NULL),
+          ("87929033148", NULL, "11346108000157", NULL),
+          ("68936348182", NULL, "48248458000190", NULL),
+          ("19927323243", NULL, "30865274000104", NULL),
+          ("94930630597", NULL, "85214715000108", NULL),
+          ("21932639738", NULL, "32605925000152", NULL),
+          ("81929587142", NULL, "77743700000109", NULL),
+          ("87920308075", NULL, "73685215000167", NULL),
+          ("81939982501", NULL, "78421344000161", NULL),
+          
+          ("81939882455", NULL, NULL, "85215974155"),
+          ("81920843358", NULL, NULL, "75365495111"),
+          ("81921468914", NULL, NULL, "12395175333"),
+          ("81936676699", NULL, NULL, "18039522293"),
+          ("81937476247", NULL, NULL, "75120273114"),
+          ("81930406564", NULL, NULL, "78249824407");
 ```
 
 > Inserindo Dados na Tabela Itens de Venda
@@ -492,21 +552,21 @@ INSERT INTO telefone (numero, Fornecedor_CNPJ, cliente_CNPJ, Funcionario_CPF)
 
 ```sql
 -- -----------------------------------------------------
--- Insert itensvenda
+-- Insert itensVenda
 -- -----------------------------------------------------
 
-INSERT INTO itensvenda (Venda_idVenda, Estoque_codProduto, qtdProduto)
+INSERT INTO itensVenda (Venda_idVenda, Estoque_codProduto, qntProduto)
 	VALUE 
-		("1", "700821", "2"),
-    ("2", "850171", "5"),
-    ("3", "740014", "3"),
-    ("4", "600025", "3"),
-    ("5", "530100", "2"),
-    ("6", "740050", "3"),
-    ("7", "600123", "2"),
-    ("8", "250012", "2"),
-    ("9", "740019", "3"),
-    ("10", "700821", "2");
+		  ("1", "700821", "2"),
+          ("2", "850171", "5"),
+          ("3", "740014", "3"),
+          ("4", "600025", "3"),
+          ("5", "530100", "2"),
+          ("6", "740050", "3"),
+          ("7", "600123", "2"),
+          ("8", "250012", "2"),
+          ("9", "740019", "3"),
+          ("10", "700821", "2");
 ```
 
 > Inserindo Dados na Tabela Venda
@@ -514,21 +574,21 @@ INSERT INTO itensvenda (Venda_idVenda, Estoque_codProduto, qtdProduto)
 
 ```sql
 -- -----------------------------------------------------
--- Insert into venda
+-- Insert into Venda
 -- -----------------------------------------------------
 
-INSERT INTO venda (dataVenda, valorTotal, obs, Funcionario_CPF)
+INSERT INTO Venda (dataVenda, valorTotal, obs, cliente_cnpj, Funcionario_CPF)
 	VALUE
-		("2022.12.02", "800.00", null, "85215974155"),
-    ("2022.11.05", "700.00", null, "85215974155"),
-    ("2022.10.03", "1200.00", null, "85215974155"),
-    ("2022.09.04", "4000.00", null, "75365495111"),
-    ("2022.08.10", "950.50", null, "75365495111"),
-    ("2022.07.12", "3250.00", null, "75365495111"),
-    ("2022.06.16", "250.35", null, "12395175333"),
-    ("2022.05.18", "658.00", null, "12395175333"),
-    ("2022.04.06", "980.00", null, "12395175333"),
-    ("2022.03.25", "1200.00", null, "12395175333");
+		  ("2022.12.02", "800.00", NULL, "4335917000106", "85215974155"),
+          ("2022.11.05", "700.00", NULL, "11346108000157", "85215974155"),
+          ("2022.10.03", "1200.00", NULL, "27690818000130", "85215974155"),
+          ("2022.09.04", "4000.00", NULL, "30865274000104", "75365495111"),
+          ("2022.08.10", "950.50", NULL, "32354618000146", "75365495111"),
+          ("2022.07.12", "3250.00", NULL, "39165274000176", "75365495111"),
+          ("2022.06.16", "250.35", NULL, "39165274000176", "12395175333"),
+          ("2022.05.18", "658.00", NULL, "39165274000176", "12395175333"),
+          ("2022.04.06", "980.00", NULL, "57541425000125", "12395175333"),
+          ("2022.03.25", "1200.00", NULL, "57541425000125", "12395175333");
 ```
 
 > Inserindo Dados na Tabela Endereço
@@ -590,30 +650,55 @@ DELETE FROM estoque
 ### **Atualizando dados nas tabelas - DML**
 
 ```sql
-UPDATE funcionario 
+-- -----------------------------------------------------
+-- Deletar ou atualizar DML
+-- -----------------------------------------------------
+DELETE FROM `Funcionario`
+	WHERE `cpf` = 12395175333;
+
+DELETE FROM `GLRefrigeracao`.`Estoque`
+	WHERE `marca` like 'importado';
+
+DELETE FROM `Fornecedor`
+	WHERE `status` = 1
+		AND `valorFrete`= 350.00;
+    
+DELETE FROM `Estoque`
+	WHERE `nome` LIKE 'condensador%';
+
+-- Deletando de Estoque o produto mais barato que não foi vendido no último mês
+DELETE FROM Estoque
+	WHERE codProduto NOT IN (
+		SELECT Compras.Estoque_codProduto
+			FROM Compras
+				WHERE dataComp <= CURRENT_DATE - INTERVAL 1 MONTH)
+                ORDER BY preco;
+                
+UPDATE Funcionario 
 	SET funcao = 'gerente'
 		WHERE CPF = 18039522293;
         
-UPDATE estoque 
-	SET nomeProduto = 'CAIXA EVAPORADORA UNIVERSAL%'
-    WHERE nomeProduto = 'CAIXA EVAPORADORA UNIVERSAL';
+UPDATE Estoque 
+	SET nome = 'CAIXA EVAPORADORA UNIVERSAL%'
+		WHERE nome = 'CAIXA EVAPORADORA UNIVERSAL';
 
-UPDATE funcionario 
+UPDATE Funcionario 
 	SET nome = 'Ayrton Maya Soares'
 		WHERE cpf = 18039522293;
         
-UPDATE telefone 
+UPDATE Telefone 
 	SET numero = 81955694845
 		WHERE cliente_CNPJ = 4335917000106;
         
-UPDATE venda 
+UPDATE Venda
 	SET obs = 'Revisar CNPJ deste cliente, pois está com suspeita de fraude. Frizar aos vendedores a necessidade de analisar se o CNPJ fornecedido é oriundo de oficinas ou afins.'
-		WHERE idVenda = 3 and funcionarioCPF = 85215974155;
+		WhERE idVenda = 3 AND Funcionario_CPF = 85215974155;
 ```
+
 ---
+
 ---
----
----
+
 ## DQL - **Data Query Language**
 
 ### Consultas
@@ -739,7 +824,7 @@ select f.nome "Empregado", f.CPF "CPF", f.dataAdm "Data Admissão", f.salario "S
 ```
 
 ```sql
---09) Lista das Vendas, informando o detalhamento de cada venda quanto os seus itens, trazendo as
+--10) Lista das Vendas, informando o detalhamento de cada venda quanto os seus itens, trazendo as
 --colunas (Data Venda, Nome Produto, Quantidade ItensVenda, Valor Produto, Valor Total Venda, Nome Empregado, Nome do Departamento),
 --ordenado por Data Venda;
 
@@ -754,7 +839,7 @@ select v.dataVenda "Data", est.nome "Produto", iv.qtdProduto "Quantidade",
 ```
 
 ```sql
---10) Valor do frete de cada fornecedor, trazendo as 
+--11) Valor do frete de cada fornecedor, trazendo as
 --colunas (Nome Fornecedor, CNPJ, Numéro Telefone, Estado),
 --ordenado pelo preço do frete.
 
@@ -766,9 +851,9 @@ select f.nome"Fornecedor", f.cnpj"CNPJ", tel.numero"Número", en.Estado"Estado",
 ```
 
 ```sql
---11) Lista dos empregados que são da cidade do xxxx, trazendo as
+--12) Lista dos empregados que são da cidade do xxxx, trazendo as
 --colunas (Nome Empregado, CPF Empregado, Data Admissão, Salário, Cidade Moradia, Numero de Telefone),
--- ordenado por nome do empregado;
+--ordenado por nome do empregado;
 
 select f.nome "Funcionário", f.cpf "CPF", f.dataAdm "Data Admissão", f.salario "Salário", 
 	en.cidade "Cidade"
@@ -779,16 +864,18 @@ select f.nome "Funcionário", f.cpf "CPF", f.dataAdm "Data Admissão", f.salario
 				group by (f.cpf)
 					order by f.nome;
 ```
+
 ---
+
 ---
----
----
+
 ## PROCEDURE
 
 > 01
 > 
 
 ```sql
+-- 1
 delimiter //
 create procedure relatorioVendas(in dataInicio date, in dataFim date)
 	begin
@@ -808,6 +895,7 @@ delimiter ;
 > 
 
 ```sql
+-- 2
 delimiter //
 	create procedure funcionario(in nome varchar (120))
 		begin
@@ -825,6 +913,7 @@ call funcionario('Livia Vitoria');
 > 
 
 ```sql
+-- 3
 delimiter //
 create procedure precoProduto(in cod int(13))
 	begin 
@@ -844,6 +933,7 @@ call precoProduto('10029');
 > 
 
 ```sql
+-- 4
 delimiter //
 create procedure inserirProd(in cod bigint(13), in n varchar(120), in ma varchar(45), in p decimal(8,2), in d varchar(50))
 	begin
@@ -864,6 +954,7 @@ delimiter  //
 > 
 
 ```sql
+-- 5    
 delimiter //
 create procedure vendaFuncionario(in nomeFun varchar(120)) 
 	begin 
@@ -877,13 +968,13 @@ create procedure vendaFuncionario(in nomeFun varchar(120))
 						order by v.dataVenda;
 	end //
 delimiter ;
-
 ```
 
 > 06
 > 
 
 ```sql
+-- 6
 delimiter //
 create procedure reajuteSal(in taxa decimal(4,2))
 		begin
@@ -896,18 +987,32 @@ delimiter ;
 > 
 
 ```sql
-delimiter //
-create procedure reajuteSal(in taxa decimal(4,2))
-		begin
-			update empregato set salario = salario * taxa;
-		end // 
-delimiter ;
+
 ```
 
 > 08
 > 
 
 ```sql
+
+```
+
+> 09
+> 
+
+> 10
+> 
+
+---
+
+## FUNCTION
+
+```sql
+-- -----------------------------------------------------
+-- functions
+-- -----------------------------------------------------
+
+-- 1
 delimiter //
 create function tempoServ(c varchar(14), dataIni datetime)
 	returns int
@@ -927,27 +1032,97 @@ create function tempoServ(c varchar(14), dataIni datetime)
 delimiter ;
 ```
 
-> 09
-> 
+---
 
-> 10
-> 
----
----
----
----
-## FUNCTION
-
----
----
----
----
 ## VIEW
 
 ---
+
+## TRIGGERS
+
+```sql
+-- -----------------------------------------------------
+-- triggers
+-- -----------------------------------------------------
+
+-- 1
+delimiter // 
+create trigger tgr_ItensVenda_Insert_Af after insert 
+	on itensvenda 
+    for each row
+		begin 
+			declare valorProduto decimal(8,2);
+            select preco into valorProduto from estoque
+				where codProduto = new.estoque_codproduto;
+			update estoque set qnt = qnt - new.qtd.Produto
+				where codProduto = new.estoque_codProduto;
+			update venda set valorTotal = valorTotal + (valorProduto * new.qtdProduto)
+				where idVenda = new.venda_idVenda;
+		end //
+delimiter ;
+```
+
+```sql
+-- 2
+delimiter //
+create trigger tgr_comptras_insert_af after insert
+	on estoque
+    for each row
+		begin
+```
+
+```sql
+-- 3
+delimiter //
+create trigger tgr_ItensVenda_Delete_Af after delete
+on itensVenda
+for each row
+	begin 
+		declare valorProduto decimal(7,2);
+        select preco into valorProduto from estoque
+			where codProduto = old.estoque_codProduto;
+		update estoque set qtd = qtd + old.qtdProduto 
+			where codProduto  = old.estoque_codProduto;
+		update vendas set valorTotal = valorTotal - (valorProd * old.qtdProduto)
+			where idvenda = old.venda_idvenda;
+	end //
+delimiter ;
+```
+
+```sql
+-- 4
+delimiter //
+create trigger tgr_Venda_Insert_Be before insert
+on venda 
+for each row
+	begin 
+		if new.valorTotal >= 8000 then
+        update venda 
+        set new.valorTotal = (valorTotal * 0.15) - valorTotal
+        where valorTotal = new.valorTotal;
+        end if ;
+	end //
+delimiter ;
+```
+
+```sql
+-- 5
+create trigger trg_Salario_insert_bf before insert
+on funcionario 
+for each row
+	begin
+		if new.salario > 2000 then
+			SIGNAL SQLSTATE '50001'set message_text = 'Valor acima do permitido para vendedor.'
+				where new.funcao like 'caixa';
+		and if ;
+	end //
+delimiter ;
+```
+
 ---
+
 ---
----
+
 ### Squad 01 - Avestruz Solutions
 
 Apolo Nicolas
