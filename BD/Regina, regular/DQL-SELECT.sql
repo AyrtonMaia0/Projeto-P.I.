@@ -32,24 +32,19 @@ select c.nome"Nome Cliente", c.cnpj"CNPJ", t.numero"Telefone Cliente", f.nome"Ve
         left join Telefone t on c.cnpj = t.cliente_cnpj
 			where v.idvenda = '3';
 
--- ERRO
--- 4. Nome dos funcionários que realizaram mais de 5 vendas no mes 08.2022, trazendo as colunas (Nome Funcionário, Telefone Empregado, CPF Empregado, 
--- Total Valor Vendido) ordenado pela Data Venda.
-
-select f.nome"Empregado", f.cpf"CPF", tel.numero "Numero", sum(v.valorTotal)"Valor Total", count(v.idVenda)"Vendas", v.dataVenda"Data"
-	from funcionario f
-		inner join Venda v on f.cpf = v.funcionario_cpf
-        inner join Telefone tel on f.cpf = tel.funcionario_cpf
-			having count(v.idVenda) >= 5
-				group by v.idvenda
-					order by v.dataVenda;
+-- 4. Nome do Funcionário, Tempo que está na empresa (em dias), e o Valor total do que gerou de Receita para a empresa
+-- Ordenar do maior valor para o menor de Receita
+SELECT f.nome "Empregado", CONCAT(timestampdiff(day, f.dataAdm, now()), " dias") "Tempo na empresa", SUM(v.valorTotal) "Total vendido"
+	FROM Funcionario AS f
+		INNER JOIN Venda AS v ON f.cpf = v.funcionario_cpf
+			GROUP BY CPF
+				ORDER BY SUM(v.valorTotal) DESC;
 
 -- 5. Nome dos clientes cadastrados no banco de dados da empresa, trazendo as colunas (Nome Cliente, Número Telefone, CNPJ, Cidade Moradia)
-
-select c.nome"Nome", c.cnpj"CNPJ", tel.numero, en.cidade"Cidade Fornecedor"
-	from cliente c
-		inner join telefone tel on c.cnpj = tel.cliente_cnpj
-		left join endereco en on c.cnpj = en.cliente_cnpj
+select c.nome"Nome", c.cnpj"CNPJ", tel.numero "Telefone", en.cidade"Cidade Fornecedor"
+	from Cliente c
+		inner join Telefone tel on c.cnpj = tel.cliente_cnpj
+		left join Endereco en on c.cnpj = en.cliente_cnpj
 			order by tel.numero;
 
 -- 6. Lista dos empregados com a quantidade total de vendas já realiza por cada Empregado, trazendo as colunas (Nome Empregado,
@@ -57,40 +52,40 @@ select c.nome"Nome", c.cnpj"CNPJ", tel.numero, en.cidade"Cidade Fornecedor"
 
 select f.nome "Funcionário", f.cpf "CPF", f.salario "Salário", 
 	count(v.idvenda) "Quantidade Vendas", sum(v.valorTotal) "Total Vendido"
-		from venda v
-			left join funcionario f on f.cpf = v.funcionario_cpf
+		from Venda v
+			left join Funcionario f on f.cpf = v.funcionario_cpf
 				group by (v.funcionario_cpf)
 					order by sum(v.valorTotal) desc;
 
--- 7. Lista dos Produtos mais vendidos, informando a quantidade (total) de vezes que cada produto participou em vendas, trazendo as colunas 
--- (Nome Produto, Quantidade (Total) Vendas), ordenado por quantidade de vezes que o produto participou em vendas;
+-- 7. Lista dos Produtos mais vendidos, informando a quantidade (total) de vezes que cada produto participou em vendas, 
+-- trazendo as colunas (Nome Produto, Quantidade (Total) Vendas), 
+-- ordenado por quantidade de vezes que o produto participou em vendas;
 
-select est.nome "Nome Produto", count(iv.Estoque_codProduto) "Quantidade (Total) Vendas"
-	from itensvenda iv
-		inner join estoque est on iv.estoque_codProduto = est.codProduto
+select est.nome "Nome Produto", count(iv.Estoque_codProduto) "Vezes vendido"
+	from itensVenda iv
+		inner join Estoque est on iv.estoque_codProduto = est.codProduto
 			group by est.codProduto
 				order by count(iv.Estoque_codProduto) desc;
 
--- 7. Lista dos Produtos, informando qual Fornecedor de cada produto, trazendo as colunas (Nome Produto, Valor Produto, Categoria do Produto, 
--- Nome Fornecedor, Email Fornecedor, Telefone Fornecedor), ordenado por Nome Produto;
+-- 7. Lista dos Produtos, informando qual Fornecedor de cada produto, 
+-- trazendo as colunas (Nome Produto, Valor Produto, Categoria do Produto, Nome Fornecedor, Email Fornecedor, Telefone Fornecedor), 
+-- ordenado por Nome Produto;
 
 select est.nome"Produto", concat('R$ ', round(est.preco, 2))"Valor Produto", f.nome"Nome Fornecedor", f.email"Email Fornecedor",
     tel.numero "Telefone Fornecedor"
-    from compras c
-		inner join estoque est on est.codProduto = c.Estoque_codProduto
-        inner join fornecedor f on f.cnpj = c.Fornecedor_cnpj
-        left join telefone tel on tel.Fornecedor_cnpj = f.cnpj
+    from Compras c
+		inner join Estoque est on est.codProduto = c.Estoque_codProduto
+        inner join Fornecedor f on f.cnpj = c.Fornecedor_cnpj
+        left join Telefone tel on tel.Fornecedor_cnpj = f.cnpj
 			order by est.nome;
 
--- ERRO
--- 8. Balaço das Vendas, informando a soma dos valores vendidos por dia, trazendo as colunas (Data Venda, Quantidade de Vendas, Valor Total Venda),
--- ordenado por Data Venda;
-
-select substring(v.dataVenda, 1, 10) "Data", count(v.idVenda) "Quantidade Vendas", 
-	concat('R$ ', sum(v.valorTotal)) "Total Vendido"
-	from venda v
-		group by substring(v.dataVenda, 1, 10)
-			having count(v.idVenda) = (select max(valortotal) from venda);
+-- 8. Balanço das Vendas, informando a soma dos valores vendidos por dia,
+-- trazendo as colunas (Data, Arrecadado no dia, Vendas do dia),
+-- Ordenar pela Data;
+SELECT dataVenda "Data", SUM(valorTotal) "Arrecadado no dia", COUNT(dataVenda) "Vendas do dia"
+	FROM Venda v
+		GROUP BY v.dataVenda, v.Funcionario_CPF
+			ORDER BY dataVenda;
 
 -- 9. Lista das formas de pagamentos mais utilizadas nas Vendas, informando quantas vendas cada forma de pagamento já foi relacionada, 
 -- trazendo as colunas (Tipo Forma Pagamento, Quantidade Vendas, Total Valor Vendido), ordenado por quantidade total de vendas realizadas;
@@ -143,16 +138,16 @@ select f.nome"Fornecedor", f.cnpj"CNPJ", tel.numero"Número", en.uf"Estado", f.v
         inner join telefone tel on f.cnpj = tel.fornecedor_cnpj
 			order by f.valorFrete;
 
--- 	ERRO (Porque n consegui inserir os endereços)
--- 14. Lista dos empregados que são da cidade do xxxx, trazendo as colunas (Nome Empregado, CPF Empregado, Data Admissão,  
--- Salário, Cidade Moradia, Numero de Telefone), ordenado por nome do empregado;
+-- 14. Lista dos empregados que são da cidade do Maceió/Maceio, 
+-- trazendo as colunas (Nome Empregado, CPF Empregado, Data Admissão, Salário, Cidade Moradia, Numero de Telefone), 
+-- ordenado por nome do empregado;
 
 select f.nome "Funcionário", f.cpf "CPF", f.dataAdm "Data Admissão", f.salario "Salário", 
 	en.cidade "Cidade"
-    from funcionario f
-		left join endereco en on en.funcionario_CPF = f.cpf
-        left join telefone tel on tel.funcionario_cpf = f.cpf
-			where en.cidade like 'Maceio'
+    from Funcionario f
+		left join Endereco en on en.funcionario_CPF = f.cpf
+        left join Telefone tel on tel.funcionario_cpf = f.cpf
+			where en.cidade like 'Macei%'
 				 group by f.cpf
 					order by f.nome;
 
@@ -193,14 +188,12 @@ select e.codproduto"Código Produto", e.nome"Nome Produto", e.preco"Preco"
                     
 -- 18. Relatório dos produtos cadastrados no estoque cujo preço estão acima da média, trazendo as colunas (Código Produto,
 -- Nome Produto, Marca Produto, Preço, Quantidade Disponivel) 
-
 select codProduto"Código Produto", nome"Produto", marca"Marca", qnt"Quantidade Disponivel", preco"Preço"
 	from estoque
 		where preco > (select avg(preco) from estoque)
 			order by preco;
             
 -- 19. Relatório das vendas cujo valorTotal estão acima da média, trazendo as colunas (Data Venda, Valor Total, Nome Cliente)
-
 select v.dataVenda"Data Venda", v.valorTotal"Valor Total", c.nome"Cliente"
 	from venda v
 		inner join cliente c on c.cnpj = v.cliente_cnpj

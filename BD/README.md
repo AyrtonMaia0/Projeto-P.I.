@@ -1,10 +1,4 @@
-# Avestruz Solutions - GL Refrigerações - Banco de Dados
-
----
-
-**SUMÁRIO**
-
----
+# Avestruz Solutions - GL Refrigerações - Banco de Dado
 
 **Projeto de BD para o PI:**
 
@@ -12,12 +6,12 @@
     - [x]  o Modelagens de entidade relacionamento (MER)
     - [x]  o Modelagem relacional (MR)
 - [x]  Crie um documento simples do seu projeto de Banco de Dados para o PI que
-tenha as sessões (É OBRIGATÓRIO A CRIAÇÃO DESSE DOCUMENTO):
+  tenha as sessões (É OBRIGATÓRIO A CRIAÇÃO DESSE DOCUMENTO):
     - [x]  o Descreva em mais detalhes o minimundo do seu PI;
     - [x]  o Descreva o modelo lógico (Diagrama MER);
     - [x]  o Descreva o modelo físico (Diagrama MR);
     - [x]  o Anexe a esse documento os Scripts abaixo de uma forma organizada
-    e bem documentada.
+      e bem documentada.
 - [x]  Crie um script que irá conter todos dos scripts de criação
 (DDL) das tabelas e views do seu banco de dados (Todos os
 CREATES TABLE...);
@@ -46,8 +40,6 @@ colocado em sala de aula, e devem fazer no mínimo 10
 triggers do seu banco de dados. Use o SP/SQL, como colocado
 em sala de aula, e devem fazer no mínimo 6 **triggers**;
 
----
-
 # Descrição
 
 Nosso Banco de Dados foi criado com base no Projeto vinculado com a cadeira ‘Unidade de Extensão’, com o **Projeto Integrador.**
@@ -58,28 +50,20 @@ Com base nas reuniões com a distribuidora, vimos que havia um problema interno 
 
 Pensando nisso partimos para fazer o mapeamento interno da empresa e como poderíamos melhorar esse sistema de gerenciamento.
 
----
-
 # Modelo Conceitual
 
 ![image](https://user-images.githubusercontent.com/98968093/207747003-a799fd61-c6fc-4bd6-a7ec-e422ddb16fb0.png)
 Por meio de um diagrama BPMN conseguimos observar melhor as seções existentes na empresa GL Refrigeração.
 
----
 A distribuidora tem seu processo de compra dos produtos por meio do seu fornecedor.
 
 O sistema de vendas se trata diretamente com o funcionário (nesse caso, o vendedor-caixa), que se conecta diretamente para o cliente.
 
----
-
 # Modelo Lógico (MER)
 
-![image](https://user-images.githubusercontent.com/98968093/207747133-576faea5-1b9d-4383-9255-a899f15e1635.png)
----
+![image-20221214221710504](/home/gilmadrian/snap/typora/76/.config/Typora/typora-user-images/image-20221214221710504.png)
 
 # Modelo Físico (MR)
-
----
 
 ## DDL - **Data Definition Language**
 
@@ -377,10 +361,6 @@ DROP TABLE `GLRefrigeracao`.`Funcionario`;
 DROP SCHEMA `GLRefrigeracao`;
 
 ```
-
----
-
----
 
 ## DML - Data **Manipulation Language**
 
@@ -694,10 +674,6 @@ UPDATE Venda
 		WhERE idVenda = 3 AND Funcionario_CPF = 85215974155;
 ```
 
----
-
----
-
 ## DQL - **Data Query Language**
 
 ### Consultas
@@ -864,10 +840,6 @@ select f.nome "Funcionário", f.cpf "CPF", f.dataAdm "Data Admissão", f.salario
 					order by f.nome;
 ```
 
----
-
----
-
 ## PROCEDURE
 
 > 01
@@ -1000,9 +972,6 @@ delimiter ;
 > 
 
 > 10
-> 
-
----
 
 ## FUNCTION
 
@@ -1031,11 +1000,7 @@ create function tempoServ(c varchar(14), dataIni datetime)
 delimiter ;
 ```
 
----
-
 ## VIEW
-
----
 
 ## TRIGGERS
 
@@ -1118,11 +1083,7 @@ for each row
 delimiter ;
 ```
 
----
-
----
-
-### Squad 01 - Avestruz Solutions
+# Squad 01 - Avestruz Solutions
 
 Apolo Nicolas
 
