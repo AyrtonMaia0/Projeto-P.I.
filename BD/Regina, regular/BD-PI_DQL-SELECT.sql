@@ -169,17 +169,14 @@ select v.idvenda"ID Venda", f.nome "Funcionário",  v.dataVenda "Data Venda", v.
             and
             v.dataVenda between '2022-05-18' and '2022-11-05';
 
--- ERRO
--- 17. Liste os produtos que possuem um preço acima da média e quantas vezes esse produto participou de uma venda, trazendo as colunas(
--- Código Produto, Nome Produto, Preço Produto, Número De Vendas)
+-- 17. Liste os produtos que possuem um preço acima da média e quantas vezes esse produto participou de uma venda, 
+-- trazendo as colunas(Código Produto, Nome Produto, Preço Produto, Número De Vendas)
+SELECT e.codProduto "Código", e.nome "Produto", e.preco "Preço", count(iv.qntProduto) "Nº de vendas"
+	FROM Estoque e
+		INNER JOIN itensVenda iv ON iv.Estoque_codProduto = e.codProduto
+			WHERE e.preco >= (SELECT AVG(e.preco) FROM Estoque e)
+				GROUP BY codProduto;
 
-select e.codproduto"Código Produto", e.nome"Nome Produto", e.preco"Preco"
-	from estoque e
-		where e.preco >= (select avg(preco) from estoque) in
-			(select count(iv.venda_idvenda)"Numero de Vendas"
-				from itensVenda iv
-					where count(iv.venda_idvenda));
-                    
 -- 18. Relatório dos produtos cadastrados no estoque cujo preço estão acima da média, trazendo as colunas (Código Produto,
 -- Nome Produto, Marca Produto, Preço, Quantidade Disponivel) 
 select codProduto"Código Produto", nome"Produto", marca"Marca", qnt"Quantidade Disponivel", preco"Preço"
