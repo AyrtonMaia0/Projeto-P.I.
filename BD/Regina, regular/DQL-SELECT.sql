@@ -151,21 +151,15 @@ select f.nome "Funcionário", f.cpf "CPF", f.dataAdm "Data Admissão", f.salario
 				 group by f.cpf
 					order by f.nome;
 
-
--- Roda, mas não trás os dados corretos					
--- 15. Lista dos cliente que mais realizaram compras na loja, trazendo as colunas (Nome Cliente, Quantidade Compras, Valor Compras, 
--- Numero Telefone, Cidade Cliente).
-
-select c.nome"Cliente", count(v.idvenda)"Quantidade de Compras", sum(v.valorTotal)"Valor Compras", t.numero"Telefone Cliente", e.cidade"Cidade Cliente"
-	from venda v
-		inner join cliente c on c.cnpj = v.cliente_cnpj
-        left join endereco e on c.cnpj = e.cliente_cnpj
-        inner join telefone t on c.cnpj = t.cliente_cnpj
-			where v.idvenda
-				order by v.valorTotal;
+-- 15. Lista de contatos dos clientes
+-- trazendo as colunas (Nome do cliente, E-mail, Endereço e Telefone).
+SELECT c.nome "Cliente", c.email "E-mail", concat(e.rua, ", nº ", e.numero, ", ", e.bairro, ", ", e.cidade, " - ", e.uf) "Endereço", t.numero "Telefone"
+	FROM Cliente c
+		LEFT JOIN Endereco e ON e.Cliente_CNPJ = c.CNPJ
+			LEFT JOIN Telefone t ON t.Cliente_CNPJ = c.CNPJ
+				ORDER BY c.nome;
 
 -- 16. Relatório das vendas que foram pagas a vista entre as datas 2022-05-18 - 2022-11-05, trazendo as colunas (ID Venda, Funcionário, Data Venda, Valor Total, Cliente, CNPJ Cliente e Tipo de pagamento) 
-
 select v.idvenda"ID Venda", f.nome "Funcionário",  v.dataVenda "Data Venda", v.valorTotal "Valor Total", c.nome "Cliente", v.cliente_cnpj "CNPJ Cliente", fp.tipoPag "Tipo de pagamento"
 	from venda v
 		left join funcionario f on f.cpf = v.funcionario_cpf

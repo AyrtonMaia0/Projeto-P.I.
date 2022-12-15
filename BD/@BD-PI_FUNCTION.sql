@@ -1,3 +1,0 @@
-delimeter //
-
-delimeter ;
