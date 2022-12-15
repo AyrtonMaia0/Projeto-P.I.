@@ -61,7 +61,7 @@ O sistema de vendas se trata diretamente com o funcionário (nesse caso, o vende
 
 # Modelo Lógico (MER)
 
-![image-20221214221710504](/home/gilmadrian/snap/typora/76/.config/Typora/typora-user-images/image-20221214221710504.png)
+![image-20221214221710504](https://raw.githubusercontent.com/AyrtonMaia0/Projeto-P.I./banco_de_dados/BD/img/modeloLogico_GL_04.png)
 
 # Modelo Físico (MR)
 
